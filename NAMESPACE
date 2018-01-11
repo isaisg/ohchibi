@@ -7,3 +7,6 @@ export(chibi.phylogram)
 export(oh.cap)
 export(oh.ggsave.svg)
 export(oh.pco)
+import(ggplot2)
+import(vegan)
+
