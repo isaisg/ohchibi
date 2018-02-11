@@ -44,7 +44,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
   }else{
     if(style == "open"){
       if(is.null(col_val)){
-        p <- ggplot(Dat_rar$Map, aes_string(x = "Fraction", y = "Shannon")) + 
+        p <- ggplot(Dat_rar$Map, aes_string(x = x_val, y = y_val)) + 
           geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot) +  
           theme(axis.line = element_blank(),
                 panel.background = element_rect(fill = 'white'),
