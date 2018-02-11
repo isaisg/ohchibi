@@ -10,7 +10,7 @@
 chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="full",color_boxplot="#414141",mypch_point=21,size_point=8,alpha_point=1,stroke_point=0.5,size_boxplot=2){
   #Check the overall style
   if(style == "full"){
-    if(col_val == NULL){
+    if(is.null(col_val)){
       #Return error
     }else{
       p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
@@ -47,7 +47,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
     }
   }else{
     if(style == "open"){
-      if(col_val == NULL){
+      if(is.null(col_val)){
         p <- ggplot(Dat_rar$Map, aes_string(x = "Fraction", y = "Shannon")) + 
           geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot) +  
           theme(axis.line = element_blank(),
