@@ -8,10 +8,8 @@
 
 
 chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="full",color_boxplot="#414141",mypch_point=21,size_point=8,alpha_point=1,stroke_point=0.5,size_boxplot=2){
-  #Check the overall style
   if(style == "full"){
     if(is.null(col_val)){
-      #Return error
     }else{
       p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
         geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +  
@@ -30,11 +28,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               legend.text = element_text(size=25,family = "AvantGarde",face = "plain",colour = "#414141"),
               legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
               strip.background = element_rect(fill = "#D9D9D9",color = "#414141")) 
-      #Evaluate if shaped need to be added
       if(is.null(shape_val)){
         p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
         jitter.width = 0.1), size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
-        #Define the guides. They gotta be constant
         p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",
                                          override.aes = list(size=3,stroke=stroke_point,shape=mypch_point,alpha=alpha_point)))
         
@@ -65,11 +61,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 legend.text = element_text(size=25,family = "AvantGarde",face = "plain",colour = "#414141"),
                 legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
                 strip.background = element_rect(fill = "#D9D9D9",color = "#414141")) 
-        #Evaluate if shaped need to be added
         if(is.null(shape_val)){
           p  <- p + geom_jitter(position = position_jitter(0.2),
               size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
-          #Define the guides. They gotta be constant
           p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",
             override.aes = list(size=3,stroke=stroke_point,shape=mypch_point,alpha=alpha_point)))
           
@@ -98,11 +92,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 legend.text = element_text(size=25,family = "AvantGarde",face = "plain",colour = "#414141"),
                 legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
                 strip.background = element_rect(fill = "#D9D9D9",color = "#414141")) 
-        #Evaluate if shaped need to be added
         if(is.null(shape_val)){
           p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
             jitter.width = 0.1), size = size_point, shape = mypch_point, col = "#414141",stroke=stroke_point,alpha=alpha_point)
-          #Define the guides. They gotta be constant
           p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",
                 override.aes = list(size=3,stroke=stroke_point,shape=mypch_point,alpha=alpha_point)))
           
@@ -114,8 +106,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         }
       }
     }else{
-      #Print error does not understand that style
-      
+
     }
   }
 
