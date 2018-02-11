@@ -7,9 +7,9 @@
 #' chibi.boxplot()
 
 
-chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,mypch=21,size=10,alpha=0.7,stroke=0.5){
+chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,mypch=21,size=8,alpha=1,stroke=0.5,size_boxplot=2){
   p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) + 
-    geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=2) +  
+    geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +  
     theme(axis.line = element_blank(),
           panel.background = element_rect(fill = 'white'),
           panel.grid.major = element_line(colour =   "#D9D9D9"),
