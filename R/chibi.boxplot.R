@@ -36,7 +36,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         
       }else{
         p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
-                          size = size_point,col = color_boxplot,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,fill=col_val,shape=shape_val),inherit.aes = F)
+                          size = size_point,col = color_boxplot,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,fill=col_val,shape=shape_val),inherit.aes = F)
         p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=3,stroke=stroke_point,alpha=alpha_point)))
         
       }
@@ -105,7 +105,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           
         }else{
           p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
-                            size = size_point,col = "#414141",stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,fill=col_val,shape=shape_val),inherit.aes = F)
+                            size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,fill=col_val,shape=shape_val),inherit.aes = F)
           p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=3,stroke=stroke_point,alpha=alpha_point)))
           
         }
