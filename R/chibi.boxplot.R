@@ -7,7 +7,7 @@
 #' chibi.boxplot()
 
 
-chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="full",color_boxplot="#414141",median_color="#87240E",mypch_point=21,size_point=8,alpha_point=1,stroke_point=0.5,size_boxplot=2){
+chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="full",color_boxplot="#414141",median_color="red",mypch_point=21,size_point=8,alpha_point=1,stroke_point=0.5,size_boxplot=2){
   if(style == "full"){
     if(is.null(col_val)){
     }else{
@@ -29,14 +29,14 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
               strip.background = element_rect(fill = "#D9D9D9",color = "#414141")) 
       if(is.null(shape_val)){
-        p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+       p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
         jitter.width = 0.1), size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
         p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",
                                          override.aes = list(size=3,stroke=stroke_point,shape=mypch_point,alpha=alpha_point)))
         
       }else{
         p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
-                          size = size_point,col = color_boxplot,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,fill=col_val,shape=shape_val),inherit.aes = F)
+                          size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
         p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=3,stroke=stroke_point,alpha=alpha_point)))
         
       }
@@ -44,7 +44,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
   }else{
     if(style == "open"){
       if(is.null(col_val)){
-        p <- ggplot(Dat_rar$Map, aes_string(x = x_val, y = y_val)) + 
+        p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
           geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot) +  
           theme(axis.line = element_blank(),
                 panel.background = element_rect(fill = 'white'),
@@ -63,8 +63,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 strip.background = element_rect(fill = "#D9D9D9",color = "#414141")) 
         if(is.null(shape_val)){
           dat <- ggplot_build(p)$data[[1]]
-          p < - p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
-                                         y=middle, yend=middle), colour=median_color, size=size_boxplot)
+          p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+                                         y=middle, yend=middle), colour=median_color, size=size_boxplot+2)
           p  <- p + geom_jitter(position = position_jitter(0.2),
               size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
           p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",
@@ -105,7 +105,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           
         }else{
           p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
-                            size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,fill=col_val,shape=shape_val),inherit.aes = F)
+                            size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
           p <- p +guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=3,stroke=stroke_point,alpha=alpha_point)))
           
         }
@@ -114,7 +114,6 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
     }
   }
-
   return(p)
 }
 
