@@ -7,17 +7,16 @@
 #' chibi.boxplot()
 
 
-chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="mixed",mpalette=NULL,color_boxplot="#414141",median_color="red",mypch_point=21,size_point=3,alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2){
+chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NULL,style="mix",mpalette=NULL,color_boxplot="#414141",median_color="red",mypch_point=21,size_point=4,alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2){
   if(is.null(mpalette)){
     mpalette <- c("#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666")
+    mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
+    
   }
   if(style == "full"){
     if(is.null(col_val)){
       stop("ERROR: Need to provide a col_val when using the full style",call.=TRUE)
     }else{
-      if(is.null(mpalette)){
-        mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
-      }
       p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
         geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +  
         theme(axis.line = element_blank(),
@@ -43,7 +42,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                                           y=middle, yend=middle), colour=median_color, size=size_median,inherit.aes = F)
        p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
         jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-       myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
+       myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
        x_interval <- 1:myrep
        limit_x <- length(x_interval)-1
        x_interval <- x_interval[1:limit_x]+0.5
@@ -111,9 +110,6 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         }
         
       }else{
-        if(is.null(mpalette)){
-          mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
-        }
         p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) + 
           geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +  
           theme(axis.line = element_blank(),
@@ -157,11 +153,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         }
       }
   }else if (style == "mix"){
-    if(is.null(mpalette)){
-        mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
-    }
     if(is.null(shape_val)){
-        myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
+        myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
         p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
           geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
           scale_color_manual(values = rep("#414141",myrep)) + 
