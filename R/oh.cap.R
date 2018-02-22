@@ -7,7 +7,7 @@
 #' oh.cap()
 
 
-oh.cap<-function(Tab=NULL,Map=NULL,formula=formula,distfun=distfun,perms=5000,sqrt=T){
+oh.cap<-function(Tab=NULL,Map=NULL,formula=formula,distfun=distfun,perms=5000,sqrt=TRUE){
   formula<-as.formula(paste("t(Tab) ~",formula))
   cap <- vegan::capscale(formula = formula,data = Map,dfun = distfun,sqrt.dist = sqrt)
   #Compute summary of the cap
