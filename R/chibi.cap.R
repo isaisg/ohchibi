@@ -35,13 +35,13 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,comp_a=NULL,comp_b=NULL,mypch=2
           legend.position ="right") 
   p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
   #Add the total variance explained and the significance as a title for the plot
-  if(pval <0.001){
-    p<-p + theme(plot.title = element_text(family = 'AvantGarde',colour="#414141",hjust=1,size = 30)) +labs(title=paste(format(vartot, digits=3), " % of total variance, p-value<0.001",sep=""))
-    
-  }else{
-    p<-p + theme(plot.title = element_text(family = 'AvantGarde',colour="#414141",hjust=1,size = 30)) +labs(title=paste(format(vartot, digits=3), " % of total variance, p-value=",format(pval, digits=3),sep=""))
-    
-  }
+  #if(pval <0.001){
+  #  p<-p + theme(plot.title = element_text(family = 'AvantGarde',colour="#414141",hjust=1,size = 30)) +labs(title=paste(format(vartot, digits=3), " % of total variance, p-value<0.001",sep=""))
+  #  
+  #}else{
+  #  p<-p + theme(plot.title = element_text(family = 'AvantGarde',colour="#414141",hjust=1,size = 30)) +labs(title=paste(format(vartot, digits=3), " % of total variance, p-value=",format(pval, digits=3),sep=""))
+  #  
+  #}
   return(p)
 }
 
