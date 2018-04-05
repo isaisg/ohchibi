@@ -9,7 +9,12 @@
 
 oh.cap<-function(Tab=NULL,Map=NULL,formula=formula,distfun=distfun,perms=5000,sqrt=TRUE){
   formula<-as.formula(paste("t(Tab) ~",formula))
-  cap <- vegan::capscale(formula = formula,data = Map,dfun = distfun,sqrt.dist = sqrt)
+  if(isTRUE(sqrt)){
+    cap <- vegan::capscale(formula = formula,data = Map,dfun = distfun,sqrt.dist = TRUE)
+  }else{
+    cap <- vegan::capscale(formula = formula,data = Map,dfun = distfun,sqrt.dist = FALSE)
+    
+  }
   #Compute summary of the cap
   cap_sum <- summary(cap)
   perm_anova_model <- anova.cca(object = cap,permutations = perms)
