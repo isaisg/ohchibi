@@ -9,7 +9,9 @@
 
 chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample", 
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
-                        space = "free_x", nrow.legend = 20, ntaxa = NULL, other_name = "other",mformula=NULL,funsum="mean") {
+                        space = "free_x", nrow.legend = 20, ntaxa = NULL, 
+                        other_name = "other",mformula=NULL,funsum="mean",y_vjust=0.5,size_axis_text=20,
+                        size_axis_title=30,size_legend_text=20,size_strip_text=10) {
   #Taken from AMOR Phylogram structure
   if (is.numeric(ntaxa)) {
     if (nrow(Tab) > ntaxa) {
@@ -33,24 +35,26 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
   Dat <- melt(Tab, id.vars = colname, variable.name = variable.name, 
               value.name = value.name)
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
-                               fill = variable.name)) + geom_bar(stat = "identity", 
-                                                                 position = "fill", width = 1) + 
+      fill = variable.name)) + geom_bar(stat = "identity", 
+    position = "fill", width = 2) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(axis.line = element_blank(),
-          panel.background = element_rect(fill = 'white'),
-          panel.grid.major = element_line(colour =   "#D9D9D9"),
-          panel.grid.minor = element_line(colour = "#D9D9D9"),
-          panel.border = element_rect(fill=NA,color =  "#414141",size = 1),
-          axis.ticks = element_line(colour = "black",size = 2.5),
-          axis.text.x = element_blank(),
-          axis.text.y = element_text(family = "AvantGarde",face="plain",size=20,colour="#414141"),
-          axis.title.x = element_text(family = "AvantGarde",face="plain",size = 30,colour = "#414141"),
-          axis.title.y = element_text(family = "AvantGarde",face="plain",size=30,colour="#414141"),
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.spacing.x = unit(0, "lines"),
+          panel.border = element_blank(),
+          axis.ticks.y =element_line(colour = "black",size = 2.5),
+          axis.ticks.x =element_line(colour = "black",size = 2.5),
+          axis.text.x =element_blank(),
+          axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text,colour="#414141",vjust = y_vjust),
+          axis.title.x = element_text(family = "AvantGarde",face="plain",size = size_axis_title,colour = "#414141"),
+          axis.title.y = element_text(family = "AvantGarde",face="plain",size=size_axis_title,colour="#414141"),
           legend.background = element_blank(),legend.key.size = unit(2,"line"),
-          legend.title=element_blank(),legend.key = element_blank(), 
-          legend.text = element_text(size=25,family = "AvantGarde",face = "plain",colour = "#414141"),
-          legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
-          strip.background = element_rect(fill = "#D9D9D9",color = "#414141"),
-          strip.text.x = element_text(family = "AvantGarde",size = 7)) 
+          legend.title=element_blank(),legend.key = element_blank(),
+          legend.text = element_text(size=size_legend_text,family = "AvantGarde",face = "plain",colour = "#414141"),
+          legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
+          strip.background = element_blank(),
+          )
   if (!is.null(Map) & !is.null(facet)) {
     p1 <- p1 + facet_grid(facet, scales = scales, space = space)
   }
@@ -69,24 +73,26 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
     temp$Sample<-factor(apply(temp2,1,paste,collapse="_"))
   }
   p2 <- ggplot(temp, aes_string(x = "Sample", y = "Abundance", 
-                                fill = "Taxon")) + geom_bar(stat = "identity", 
-                                                            position = "fill", width = 1) + 
+    fill = "Taxon")) + geom_bar(stat = "identity", 
+      position = "fill", width = 2) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(axis.line = element_blank(),
-          panel.background = element_rect(fill = 'white'),
-          panel.grid.major = element_line(colour =   "#D9D9D9"),
-          panel.grid.minor = element_line(colour = "#D9D9D9"),
-          panel.border = element_rect(fill=NA,color =  "#414141",size = 1),
-          axis.ticks = element_line(colour = "black",size = 2.5),
-          axis.text.x = element_blank(),
-          axis.text.y = element_text(family = "AvantGarde",face="plain",size=20,colour="#414141"),
-          axis.title.x = element_text(family = "AvantGarde",face="plain",size = 30,colour = "#414141"),
-          axis.title.y = element_text(family = "AvantGarde",face="plain",size=30,colour="#414141"),
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.spacing.x = unit(0, "lines"),
+          panel.border = element_blank(),
+          axis.ticks.y =element_line(colour = "black",size = 2.5),
+          axis.ticks.x =element_line(colour = "black",size = 2.5),
+          axis.text.x =element_blank(),
+          axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text,colour="#414141",vjust = y_vjust),
+          axis.title.x = element_text(family = "AvantGarde",face="plain",size = size_axis_title,colour = "#414141"),
+          axis.title.y = element_text(family = "AvantGarde",face="plain",size=size_axis_title,colour="#414141"),
           legend.background = element_blank(),legend.key.size = unit(2,"line"),
-          legend.title=element_blank(),legend.key = element_blank(), 
-          legend.text = element_text(size=25,family = "AvantGarde",face = "plain",colour = "#414141"),
-          legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = 20),
-          strip.background = element_rect(fill = "#D9D9D9",color = "#414141"),
-          strip.text.x = element_text(family = "AvantGarde",size = 7)) 
+          legend.title=element_blank(),legend.key = element_blank(),
+          legend.text = element_text(size=size_legend_text,family = "AvantGarde",face = "plain",colour = "#414141"),
+          legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
+          strip.background = element_blank(),
+          )
   if (!is.null(Map) & !is.null(facet)) {
     p2 <- p2 + facet_grid(facet, scales = scales, space = space)
   }
