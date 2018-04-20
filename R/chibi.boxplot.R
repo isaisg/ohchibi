@@ -698,6 +698,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           if(lfacet == 1){
             #Implement as well two options to color the median
             if(median_colored_as_points == FALSE){
+              myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) + 
@@ -768,6 +769,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               p <- p + geom_vline(xintercept = x_interval,color="#D9D9D9",size=0.3)
               
             }else{
+              myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) + 
@@ -796,7 +798,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
               dat <- ggplot_build(p)$data[[1]]
               map_melted <- melt(dcast(formula = red_formula,data=Map,fun.aggregate = length,value.var = y_val,drop = T),
-                                 id.vars = c(1,2),,variable.name = x_val)
+                                 id.vars = c(1,2),variable.name = x_val)
               map_melted <- map_melted[which(map_melted$value!=0),]
               refdf <- data.frame(col_val = levels(Map[,which(colnames(Map)==col_val)]),colors=mpalette)
               int_cols <- which(colnames(map_melted)!=col_val)
@@ -842,6 +844,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             
           }else if (lfacet ==2){
             if(median_colored_as_points == FALSE){
+              myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) + 
@@ -870,7 +873,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
               dat <- ggplot_build(p)$data[[1]]
               map_melted <- melt(dcast(formula = red_formula,data=Map,fun.aggregate = length,value.var = y_val,drop = T),
-                                 id.vars = c(1,2,3),,variable.name = x_val)
+                                 id.vars = c(1,2,3),variable.name = x_val)
               map_melted <- map_melted[which(map_melted$value!=0),]
               refdf <- data.frame(col_val = levels(Map[,which(colnames(Map)==col_val)]),colors=mpalette)
               int_cols <- which(colnames(map_melted)!=col_val)
@@ -909,6 +912,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               p <- p + geom_vline(xintercept = x_interval,color="#D9D9D9",size=0.3)
               
             }else{
+              myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) + 
