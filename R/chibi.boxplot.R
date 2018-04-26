@@ -56,6 +56,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                                               y=middle, yend=middle), colour=median_color, size=size_median,inherit.aes = F)
           p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
                                                             jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+          
           myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
           x_interval <- 1:myrep
           limit_x <- length(x_interval)-1
@@ -100,6 +101,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           dat$colour <- mcolors
           p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                               y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
+          p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+                                                            jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
           
           myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
           x_interval <- 1:myrep
@@ -158,6 +161,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            
             #Draw the automatic vline
             #Determine the levels per facet_val
             num_facet <- length(levels(Map[,which(colnames(Map)==facet_vals[1])]))
@@ -223,6 +229,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
             
             #Draw the automatic vline
             #Determine the levels per facet_val
@@ -292,6 +300,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            
             #Draw the automatic vline
             mlevs <- paste(map_melted[,which(colnames(map_melted)==facet_vals[1])],
                            map_melted[,which(colnames(map_melted)==facet_vals[2])],sep = "_")
@@ -354,6 +365,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            
             mlevs <- paste(map_melted[,which(colnames(map_melted)==facet_vals[1])],
                            map_melted[,which(colnames(map_melted)==facet_vals[2])],sep = "_")
             num_facet <- length(unique(mlevs))
