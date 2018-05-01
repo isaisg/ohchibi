@@ -16,6 +16,7 @@ chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",co
   if(is.null(shape_val)){
     p <- ggplot(data = Map_pco,aes_string(x = comp_a,y = comp_b))+
       geom_point(size = size,alpha=alpha,pch=mypch,colour="#414141",stroke = stroke,aes(fill = get(col_val)))+
+      geom_point(size = size/ratio_size_shape_background,colour = col_shape_background,alpha=alpha_shape_background)+ 
       #scale_fill_manual(values = mix.colors)+
       xlab(label = paste(comp_a,"(",myvar[which(names(myvar)==comp_a)],"%)",sep="")) + 
       ylab(label = paste(comp_b,"(",myvar[which(names(myvar)==comp_b)],"%)",sep="")) +

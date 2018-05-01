@@ -18,6 +18,7 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
     if(is.null(shape_val)){
     p <- ggplot(data = Map_cap,aes_string(x = comp_a,y = comp_b))+
       geom_point(size = size,alpha=alpha,pch=mypch,colour="#414141",stroke = stroke,aes_string(fill = col_val))+
+      geom_point(size = size/ratio_size_shape_background,colour = col_shape_background,alpha=alpha_shape_background)+ 
       xlab(label = paste(comp_a,"(",percvar[which(names(percvar)==comp_a)],"%)",sep="")) + 
       ylab(label = paste(comp_b,"(",percvar[which(names(percvar)==comp_b)],"%)",sep="")) +
       guides(fill = guide_legend(override.aes = list(size=12))) +
