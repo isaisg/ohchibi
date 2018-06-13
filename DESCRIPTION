@@ -3,7 +3,7 @@ Title: ohchibi
 Version: 0.0.0.9000
 Authors@R: person("Isai", "Salas Gonzalez", email = "isai.salas.gonzalez@gmail.com", role = c("aut", "cre"))
 Description: Make my life easier.
-Depends: R (>= 3.4.1),
+Depends: R (>= 3.3.1),
 	 vegan(>= 2.4-4),
 	 ggplot2(>= 2.2.1),
 	 AMOR
