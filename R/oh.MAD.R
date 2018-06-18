@@ -1,3 +1,11 @@
+#' Performs MAD rooting of a phylogenetic tree
+#'
+#' 
+#' @keywords MAD, tree, phylogenetics
+#' @export
+#' @examples
+#' oh.MAD()
+
 
 MAD <- function(unrooted_newick,output_mode){
   if(nargs()==0){ #print help message
