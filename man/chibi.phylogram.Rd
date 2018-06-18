@@ -7,7 +7,9 @@
 chibi.phylogram(Tab, Map = NULL, facet = NULL, colname = "Sample",
   variable.name = "Taxon", value.name = "Abundance", scales = "free_x",
   space = "free_x", nrow.legend = 20, ntaxa = NULL,
-  other_name = "other", mformula = NULL, funsum = "mean")
+  other_name = "other", mformula = NULL, funsum = "mean", y_vjust = 0.5,
+  size_axis_text = 20, size_axis_title = 30, size_legend_text = 20,
+  size_strip_text = 10)
 }
 \description{
 Plots a proportion barplot(phylogram)

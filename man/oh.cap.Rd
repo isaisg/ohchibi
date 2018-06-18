@@ -5,7 +5,7 @@
 \title{Performs Constrained Analysis of Principal Coordinates based on vegan capscale}
 \usage{
 oh.cap(Tab = NULL, Map = NULL, formula = formula, distfun = distfun,
-  perms = 5000, sqrt = T)
+  perms = 5000, sqrt = TRUE)
 }
 \description{
 Performs CAP using capscale and automatically computes significance of the model and terms based on permutation. As well automatically extract constrained and unconstrained variances.

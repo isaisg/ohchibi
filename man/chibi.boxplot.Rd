@@ -5,7 +5,13 @@
 \title{Creates a boxplot ussing ggplot2 using variables in a metadata (Map) structure.}
 \usage{
 chibi.boxplot(Map = Map, x_val = NULL, y_val = NULL, col_val = NULL,
-  shape_val = NULL, mypch = 21, size = 10, alpha = 0.7, stroke = 0.5)
+  shape_val = NULL, style = "mix", median_colored_as_points = FALSE,
+  facet_formula = NULL, mpalette = NULL, color_boxplot = "#414141",
+  median_color = "red", mypch_point = 21, size_point = 4,
+  alpha_point = 0.5, stroke_point = 0.5, size_boxplot = 0.5,
+  size_median = 2, size_axis_text.x = 20, size_axis_text.y = 20,
+  size_axis_title.x = 30, size_axis_title.y = 30, size_legend_text = 20,
+  strip_text_size = 20, legend_proportion_size = 2)
 }
 \description{
 The boxplot can represent up to three variables from the Map object
