@@ -26,4 +26,3 @@ oh.pco<-function(Tab=Tab,Map=Map,ndim=3,eig=T,distfun=distfun,id_var="Id"){
   toret=list(Map_pco = Map_pco, variance_explained=perc_var)
   return(toret)
 }
-
