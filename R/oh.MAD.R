@@ -7,7 +7,7 @@
 #' oh.MAD()
 
 
-MAD <- function(unrooted_newick,output_mode){
+oh.MAD <- function(unrooted_newick,output_mode){
   if(nargs()==0){ #print help message
     return(cat("Minimal Ancestor Deviation (MAD) rooting","","Usage: res <- MAD(unrooted_newick,output_mode)","",
                "unrooted_newick: Unrooted tree string in newick format or a tree object of class 'phylo'","",
