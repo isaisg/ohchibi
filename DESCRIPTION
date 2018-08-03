@@ -6,10 +6,11 @@ Description: Make my life easier.
 Depends: R (>= 3.3.1),
 	 vegan(>= 2.4-4),
 	 ggplot2(>= 2.2.1),
-	 AMOR
+	 AMOR,
+	 magrittr(>= 1.5)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000
-Imports: ggplot2, vegan, AMOR
+Imports: ggplot2, vegan, AMOR,magrittr
 Remotes: surh/AMOR@0.1-2
