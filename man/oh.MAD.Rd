@@ -2,16 +2,18 @@
 % Please edit documentation in R/oh.MAD.R
 \name{oh.MAD}
 \alias{oh.MAD}
-\title{Performs MAD rooting of a phylogenetic tree}
+\title{Wrapper for MAD function}
 \usage{
-oh.MAD(unrooted_newick, output_mode)
+oh.MAD(tree = NULL, outfile = "rooted_tree.MAD.newick")
 }
 \description{
-Performs MAD rooting of a phylogenetic tree
+Wrapper for MAD function
 }
 \examples{
 oh.MAD()
 }
 \keyword{MAD,}
-\keyword{phylogenetics}
+\keyword{oh}
+\keyword{phylogenetics,}
 \keyword{tree,}
+\keyword{wrapper,}
