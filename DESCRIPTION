@@ -9,7 +9,7 @@ Depends: R (>= 3.3.1),
 	 AMOR,
 	 magrittr(>= 1.5),
 	 ape(>= 5.1),
-	 phytools( >= 0.6-44)
+	 phytools(>= 0.6-44)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
