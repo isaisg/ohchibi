@@ -8,7 +8,7 @@
 
 
 chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",comp_b="PCo2",mypch=21,
-                    size=25,alpha=0.7,stroke=1.5,col_shape_background="white",alpha_shape_background=0.7,
+                    size=25,alpha=0.7,stroke=1.5,col_shape_background="white",alpha_shape_background=0,
                     ratio_size_shape_background=1.3,y_vjust=0.5,x_hjust=0.5,size_axis_text=20,size_axis_title=30,
                     size_legend_text=20,legend_proportion_size=2){
   Map_pco<-list_ohpco$Map_pco
