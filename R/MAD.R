@@ -9,7 +9,7 @@
 
 MAD <- function(unrooted_newick,output_mode){
   if(nargs()==0){ #print help message
-    return(cat("Minimal Ancestor Deviation (MAD) rooting","","Usage: res <- oh.MAD(unrooted_newick,output_mode)","",
+    return(cat("Minimal Ancestor Deviation (MAD) rooting","","Usage: res <- MAD(unrooted_newick,output_mode)","",
                "unrooted_newick: Unrooted tree string in newick format or a tree object of class 'phylo'","",
                "output_mode: Amount of information to return.", "  If 'newick' (default) only the rooted newick string",
                "  If 'stats' also a structure with the ambiguity index, clock cv, the minimum ancestor deviation and the number of roots",
@@ -62,7 +62,7 @@ MAD <- function(unrooted_newick,output_mode){
     vv<-c(paste('@#',t$tip.label[r],'@#',sep=""),paste('(',t$tip.label[r],':0,',t$tip.label[c],':0)',sep=""))
     st<-drop.tip(t,c) 
     st$tip.label[st$tip.label==t$tip.label[r]]<-vv[1]
-    res<-oh.MAD(st,output_mode)
+    res<-MAD(st,output_mode)
     if(is.list(res)){
       res[[1]]<-sub(vv[1],vv[2],res[[1]])
     }
