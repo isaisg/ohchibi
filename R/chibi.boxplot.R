@@ -13,7 +13,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                         mypch_point=21,size_point=4,
                         alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2,
                         size_axis_text.x=20,size_axis_text.y=20,size_axis_title.x=30,size_axis_title.y=30,
-                        size_legend_text=20,strip_text_size=20,legend_proportion_size=2){
+                        size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
+			size_lines_panel = 0.3,size_panel_border = 1){
   if(is.null(mpalette)){
     mpalette <- c("#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666")
     mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
@@ -912,9 +913,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
     theme(axis.line = element_blank(),
           panel.background = element_rect(fill = 'white'),
           panel.grid.major.x =  element_blank(),
-          panel.grid.major.y =element_line(colour = "#D9D9D9",size=0.3),
-          panel.grid.minor.y = element_line(colour = "#D9D9D9",size=0.3),
-          panel.border = element_rect(fill=NA,color =  "#414141",size = 1),
+          panel.grid.major.y =element_line(colour = "#D9D9D9",size=size_lines_panel),
+          panel.grid.minor.y = element_line(colour = "#D9D9D9",size=size_lines_panel),
+          panel.border = element_rect(fill=NA,color =  "#414141",size = size_panel_border),
           axis.ticks = element_line(colour = "black",size = 2.5),
           axis.text.x = element_text(family = "AvantGarde",face = "plain",size =size_axis_text.x,colour="#414141",angle = 0),
           axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text.y,colour="#414141"),
