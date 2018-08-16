@@ -37,7 +37,7 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
             legend.text = element_text(size=size_legend_text,
                                        family = "AvantGarde",face = "plain",colour = "#414141"),
             legend.position ="right") 
-    p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
+    #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
     return(p)
     }else{
       p <- ggplot(data = Map_cap,aes_string(x = comp_a,y = comp_b,shape = shape_val))+
@@ -61,7 +61,7 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
               legend.text = element_text(size=size_legend_text,
                                          family = "AvantGarde",face = "plain",colour = "#414141"),
               legend.position ="right") 
-      p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
+      #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
       return(p)
     }
 }
