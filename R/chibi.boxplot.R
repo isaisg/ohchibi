@@ -18,7 +18,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
   if(is.null(mpalette)){
     mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
       "#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
-    mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
+   # mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
     
   }
   #Shape value should only make sense in the open style
