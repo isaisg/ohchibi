@@ -16,7 +16,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
   size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
   size_lines_panel = 0.3,size_panel_border = 1){
   if(is.null(mpalette)){
-    mpalette <- c("#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666")
+    mpalette <- brewer.pal(12,name = "Paired")
     mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
     
   }
@@ -39,7 +39,8 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
 		      geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
           data = dfs, width = width_bar,size = size_bar) + 
           geom_point(aes(y = Mean), size = size_point, data = dfs) 
-	    }else{
+	      p <- p + scale_color_manual(values = mpalette)
+      }else{
         p <- ggplot(data = Map,aes_string(x = x_val, y = y_val)) +
                geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
                data = dfs,color = bar_color, width = width_bar,size = size_bar) + 
@@ -52,19 +53,24 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
            geom_point(aes(y = Mean), size = size_point, data = dfs) + 
             geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
                   data = dfs, width = width_bar,size = size_bar)	
+        p <- p + scale_color_manual(values = mpalette)
+
   	  }else if(color_points == TRUE & color_bar == TRUE){
   		  p <- ggplot(data = df,aes_string(x = x_val ,y = y_val, color = x_val)) +
   			geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
   			  geom_point(aes(y = Mean), size = size_point, data = dfs) + 
   			  geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
-  	                data = dfs, width = width_bar,size = size_bar)		
+  	                data = dfs, width = width_bar,size = size_bar)
+        p <- p + scale_color_manual(values = mpalette)
+		
   	  }else if (color_points == TRUE & color_bar == FALSE){
     		p <- ggplot(data = df,aes_string(x = x_val ,y = y_val, color = x_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
     		geom_point(aes(y = Mean), size = size_point, data = dfs,color = bar_color) + 
     		geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
                     data = dfs, width = width_bar,size = size_bar,color = bar_color) 
-    	
+    	   p <- p + scale_color_manual(values = mpalette)
+
       }else{
     		p <- ggplot(data = df,aes_string(x = x_val ,y = y_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point,color = points_color) +
