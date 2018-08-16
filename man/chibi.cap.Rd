@@ -9,7 +9,8 @@ chibi.cap(list_ohpco = NULL, col_val = NULL, shape_val = NULL,
   stroke = 1.5, col_shape_background = "white",
   alpha_shape_background = 0, ratio_size_shape_background = 1.3,
   y_vjust = 0.5, x_hjust = 0.5, size_axis_text = 20,
-  size_axis_title = 30, size_legend_text = 20, legend_proportion_size = 2)
+  size_axis_title = 30, size_legend_text = 20, legend_proportion_size = 2,
+  size_lines_panel = 0.3, size_panel_border = 1)
 }
 \description{
 Uses the structure return from oh.cap to automatically plot a scatterplot colored by variables from the Map structured used to compute oh.cap

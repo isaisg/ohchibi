@@ -11,7 +11,8 @@ chibi.boxplot(Map = Map, x_val = NULL, y_val = NULL, col_val = NULL,
   alpha_point = 0.5, stroke_point = 0.5, size_boxplot = 0.5,
   size_median = 2, size_axis_text.x = 20, size_axis_text.y = 20,
   size_axis_title.x = 30, size_axis_title.y = 30, size_legend_text = 20,
-  strip_text_size = 20, legend_proportion_size = 2)
+  strip_text_size = 20, legend_proportion_size = 2,
+  size_lines_panel = 0.3, size_panel_border = 1)
 }
 \description{
 The boxplot can represent up to three variables from the Map object
