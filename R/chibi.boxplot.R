@@ -16,7 +16,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                         size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
 			size_lines_panel = 0.3,size_panel_border = 1){
   if(is.null(mpalette)){
-    mpalette <- c("#1B9E77","#D95F02","#7570B3","#E7298A","#66A61E","#E6AB02","#A6761D","#666666")
+    mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
+      "#FDBF6F""#FF7F00" "#CAB2D6" "#6A3D9A" "#FFFF99" "#B15928")
     mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
     
   }

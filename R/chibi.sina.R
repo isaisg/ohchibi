@@ -16,7 +16,8 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
   size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
   size_lines_panel = 0.3,size_panel_border = 1){
   if(is.null(mpalette)){
-    mpalette <- RColorBrewer::brewer.pal(n = 12,name = "Paired")
+    mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
+      "#FDBF6F""#FF7F00" "#CAB2D6" "#6A3D9A" "#FFFF99" "#B15928")
     mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
     
   }
