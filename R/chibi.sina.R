@@ -49,7 +49,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
 	   }
     }else{
       if(color_points == FALSE & color_bar == TRUE){
-        p <- ggplot(data = df,aes_string(x = x_val ,y = y_val, color = x_val)) +
+        p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
            geom_sina(size = size_point,shape = 21,alpha = alpha_point, color = points_color) +
            geom_point(aes(y = Mean), size = size_point, data = dfs) + 
             geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
@@ -57,7 +57,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
         p <- p + scale_color_manual(values = mpalette)
 
   	  }else if(color_points == TRUE & color_bar == TRUE){
-  		  p <- ggplot(data = df,aes_string(x = x_val ,y = y_val, color = x_val)) +
+  		  p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
   			geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
   			  geom_point(aes(y = Mean), size = size_point, data = dfs) + 
   			  geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
@@ -65,7 +65,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
         p <- p + scale_color_manual(values = mpalette)
 		
   	  }else if (color_points == TRUE & color_bar == FALSE){
-    		p <- ggplot(data = df,aes_string(x = x_val ,y = y_val, color = x_val)) +
+    		p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
     		geom_point(aes(y = Mean), size = size_point, data = dfs,color = bar_color) + 
     		geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
@@ -73,7 +73,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
     	   p <- p + scale_color_manual(values = mpalette)
 
       }else{
-    		p <- ggplot(data = df,aes_string(x = x_val ,y = y_val)) +
+    		p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point,color = points_color) +
     		geom_point(aes(y = Mean), size = size_point, data = dfs,color = "#414141") + 
     		geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
