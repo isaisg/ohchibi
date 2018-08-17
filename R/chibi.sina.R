@@ -82,7 +82,82 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
       } 
     }
   }else{
-      #Facet 
+    #Facet 
+    facet_formula <- gsub(pattern = " ",replacement = "",x = facet_formula)
+    lfacet <- length(unlist(strsplit(x = facet_formula,split = "\\+")))
+    facet_vals <- unlist(strsplit(x = facet_formula,split = "\\+"))
+    facet_formula <- as.formula(paste("~", facet_formula))
+    if(lfacet == 1){
+      #Option of only one facette
+      #Determine the levels and order of that factor
+      mlevels <- levels(Map[,which(colnames(Map) == facet_vals[1])])
+
+      f1 <- formula(paste0(y_val,"~",facet_vals[1], "+", x_val))
+      tdf <- aggregate(f1,Map,
+                   FUN = function(x) c(mmean = mean(x),
+                                       mmedian = median(x), msd = sd(x))
+              )
+      tdf[,1] <- factor(tdf[,1],levels = mlevels)
+      #Construct data frame of positions 
+      dfs <- data.frame(Id1 = tdf[[1]],Id2 = tdf[[2]],Mean = tdf[[3]][,1],
+                        Median = tdf[[3]][,2], SD = tdf[[3]][,3])
+      colnames(dfs)[1:2] <- c(facet_vals[1],x_val)
+      #Give all the options to construct the sina based on different aesthetics
+        if(show_points == FALSE){
+          if (color_bar == TRUE){
+            p <- ggplot(data = Map,aes_string(x = x_val, y = y_val, color = x_val)) +
+              facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+              geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+              data = dfs, width = width_bar,size = size_bar) + 
+              geom_point(aes(y = Mean), size = size_point, data = dfs) 
+            p <- p + scale_color_manual(values = mpalette)
+          }else{
+            p <- ggplot(data = Map,aes_string(x = x_val, y = y_val)) +
+                   facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+                   geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                   data = dfs,color = bar_color, width = width_bar,size = size_bar) + 
+                   geom_point(aes(y = Mean),color = bar_color, size = size_point, data = dfs) 
+         }
+      }else{
+        if(color_points == FALSE & color_bar == TRUE){
+          p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
+             facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+             geom_sina(size = size_point,shape = 21,alpha = alpha_point, color = points_color) +
+             geom_point(aes(y = Mean), size = size_point, data = dfs) + 
+              geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                    data = dfs, width = width_bar,size = size_bar)  
+          p <- p + scale_color_manual(values = mpalette)
+
+        }else if(color_points == TRUE & color_bar == TRUE){
+          p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
+          facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+          geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
+            geom_point(aes(y = Mean), size = size_point, data = dfs) + 
+            geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                      data = dfs, width = width_bar,size = size_bar)
+          p <- p + scale_color_manual(values = mpalette)
+      
+        }else if (color_points == TRUE & color_bar == FALSE){
+          p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
+          facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+          geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
+          geom_point(aes(y = Mean), size = size_point, data = dfs,color = bar_color) + 
+          geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                      data = dfs, width = width_bar,size = size_bar,color = bar_color) 
+           p <- p + scale_color_manual(values = mpalette)
+
+        }else{
+          p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val)) +
+          facet_grid(facets = facet_formula,scales = "free",space = "free") + 
+          geom_sina(size = size_point,shape = 21,alpha = alpha_point,color = points_color) +
+          geom_point(aes(y = Mean), size = size_point, data = dfs,color = "#414141") + 
+          geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                      data = dfs, width = width_bar,size = size_bar,color = "#414141") 
+    
+        } 
+      }
+    }
+
   }
   #Add theme to the plot
   p <- p +  theme(axis.line = element_blank(),
