@@ -30,8 +30,8 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
           FUN = function(x) c(mmean = mean(x),
                 mmedian = median(x), msd = sd(x))
           )
-   dfs <- data.frame(Id = tdf[[1]],Mean = tdf$MainRoot[,1],
-             Median = tdf$MainRoot[,2], SD = tdf$MainRoot[,3])
+   dfs <- data.frame(Id = tdf[[1]],Mean = tdf[[2]][,1],
+             Median = tdf[[2]][,2], SD = tdf[[2]][,3])
    colnames(dfs)[1] <- x_val
     #Here evaluate the different styles
     if(show_points == FALSE){
