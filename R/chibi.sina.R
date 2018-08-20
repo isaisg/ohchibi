@@ -44,7 +44,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
       stop("ERROR: When passing df_stats you should give me the names of the variables with the mean,ymin and ymax",call.=TRUE)
     }
     #Check if exists the x_val in the passed stats data.frame
-    if(length(which(colnames(df) == x_val)) == 0){
+    if(length(which(colnames(df_stats) == x_val)) == 0){
             stop("ERROR: The x_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
 
     }
@@ -54,7 +54,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
     colnames(dfs)[which(colnames(dfs) == ymax_var)] <- "ymax"
     #Adjust the levels to be consistent
     niv <- levels(Map[,which(colnames(Map) == x_val)])
-    df[,which(colnames(df)==x_val)] <- factor(df[,which(colnames(df) == x_val)],levels = niv)
+    dfs[,which(colnames(dfs)==x_val)] <- factor(dfs[,which(colnames(dfs) == x_val)],levels = niv)
   }
 
     #Here evaluate the different styles
@@ -133,12 +133,12 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
           stop("ERROR: When passing df_stats you should give me the names of the variables with the mean,ymin and ymax",call.=TRUE)
         }
         #Check if exists the x_val in the passed stats data.frame
-        if(length(which(colnames(df) == x_val)) == 0){
+        if(length(which(colnames(df_stats) == x_val)) == 0){
           stop("ERROR: The x_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
 
         }
         #Check if facet vals exist in the structured passed
-        if(length(which(colnames(df) == facet_vals[1])) == 0){
+        if(length(which(colnames(df_stats) == facet_vals[1])) == 0){
           stop("ERROR: The facet_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
         }
         dfs <- df_stats
@@ -147,9 +147,9 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
         colnames(dfs)[which(colnames(dfs) == ymax_var)] <- "ymax"
         #Adjust the levels to be consistent
         niv <- levels(Map[,which(colnames(Map) == x_val)])
-        df[,which(colnames(df)==x_val)] <- factor(df[,which(colnames(df) == x_val)],levels = niv)
+        dfs[,which(colnames(dfs)==x_val)] <- factor(dfs[,which(colnames(dfs) == x_val)],levels = niv)
         niv <- levels(Map[,which(colnames(Map) == facet_vals[1])])
-        df[,which(colnames(df)==facet_vals[1])] <- factor(df[,which(colnames(df) == facet_vals[1])],levels = niv)
+        dfs[,which(colnames(dfs)==facet_vals[1])] <- factor(dfs[,which(colnames(dfs) == facet_vals[1])],levels = niv)
 
       }
       #Give all the options to construct the sina based on different aesthetics
