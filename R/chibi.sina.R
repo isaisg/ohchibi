@@ -36,8 +36,8 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
    dfs <- data.frame(Id = tdf[[1]],Mean = tdf[[2]][,1],
              Median = tdf[[2]][,2], SD = tdf[[2]][,3])
    colnames(dfs)[1] <- x_val
-   dfs$ymax <- dfs$Means + dfs$SD
-   dfs$ymin <- dfs$Means - dfs$SD
+   dfs$ymax <- dfs$Mean + dfs$SD
+   dfs$ymin <- dfs$Mean - dfs$SD
   }else{
     #Check the names of the xval
     if(is.null(mean_var) | is.null(ymin_var) | is.null(ymax_var)){
