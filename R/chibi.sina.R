@@ -7,8 +7,8 @@
 #' chibi.sina()
 
 chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
-	mpalette=NULL,facet_formula=NULL,
-  df_stats == NULL,mean_var = NULL,ymin_var = NULL, ymax_var = NULL,
+	mpalette = NULL,facet_formula=NULL,
+  df_stats = NULL,mean_var = NULL,ymin_var = NULL, ymax_var = NULL,
 	show_points = TRUE , color_points = FALSE, color_bar = TRUE,
   bar_color = "#414141",points_color = "#414141",size_point=10,
   alpha_point=0.3,stroke_point=0.5,size_bar=2,width_bar = 0.2,
