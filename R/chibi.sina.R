@@ -115,30 +115,56 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
       #Option of only one facette
       #Determine the levels and order of that factor
       mlevels <- levels(Map[,which(colnames(Map) == facet_vals[1])])
+      if(is.null(df_stats)){
+        f1 <- formula(paste0(y_val,"~",facet_vals[1], "+", x_val))
+        tdf <- aggregate(f1,Map,
+                     FUN = function(x) c(mmean = mean(x),
+                                         mmedian = median(x), msd = sd(x))
+                )
+        tdf[,1] <- factor(tdf[,1],levels = mlevels)
+        #Construct data frame of positions 
+        dfs <- data.frame(Id1 = tdf[[1]],Id2 = tdf[[2]],Mean = tdf[[3]][,1],
+                          Median = tdf[[3]][,2], SD = tdf[[3]][,3])
+        colnames(dfs)[1:2] <- c(facet_vals[1],x_val)
+        dfs$ymax <- dfs$Mean + dfs$SD
+        dfs$ymin <- dfs$Mean - dfs$SD
+      }else{
+        if(is.null(mean_var) | is.null(ymin_var) | is.null(ymax_var)){
+          stop("ERROR: When passing df_stats you should give me the names of the variables with the mean,ymin and ymax",call.=TRUE)
+        }
+        #Check if exists the x_val in the passed stats data.frame
+        if(length(which(colnames(df) == x_val)) == 0){
+          stop("ERROR: The x_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
 
-      f1 <- formula(paste0(y_val,"~",facet_vals[1], "+", x_val))
-      tdf <- aggregate(f1,Map,
-                   FUN = function(x) c(mmean = mean(x),
-                                       mmedian = median(x), msd = sd(x))
-              )
-      tdf[,1] <- factor(tdf[,1],levels = mlevels)
-      #Construct data frame of positions 
-      dfs <- data.frame(Id1 = tdf[[1]],Id2 = tdf[[2]],Mean = tdf[[3]][,1],
-                        Median = tdf[[3]][,2], SD = tdf[[3]][,3])
-      colnames(dfs)[1:2] <- c(facet_vals[1],x_val)
+        }
+        #Check if facet vals exist in the structured passed
+        if(length(which(colnames(df) == facet_vals[1])) == 0){
+          stop("ERROR: The facet_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
+        }
+        dfs <- df_stats
+        colnames(dfs)[which(colnames(dfs) == mean_var)] <- "Mean"
+        colnames(dfs)[which(colnames(dfs) == ymin_var)] <- "ymin"
+        colnames(dfs)[which(colnames(dfs) == ymax_var)] <- "ymax"
+        #Adjust the levels to be consistent
+        niv <- levels(Map[,which(colnames(Map) == x_val)])
+        df[,which(colnames(df)==x_val)] <- factor(df[,which(colnames(df) == x_val)],levels = niv)
+        niv <- levels(Map[,which(colnames(Map) == facet_vals[1])])
+        df[,which(colnames(df)==facet_vals[1])] <- factor(df[,which(colnames(df) == facet_vals[1])],levels = niv)
+
+      }
       #Give all the options to construct the sina based on different aesthetics
         if(show_points == FALSE){
           if (color_bar == TRUE){
             p <- ggplot(data = Map,aes_string(x = x_val, y = y_val, color = x_val)) +
               facet_grid(facets = facet_formula,scales = "free",space = "free") + 
-              geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+              geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
               data = dfs, width = width_bar,size = size_bar) + 
               geom_point(aes(y = Mean), size = size_point, data = dfs) 
             p <- p + scale_color_manual(values = mpalette)
           }else{
             p <- ggplot(data = Map,aes_string(x = x_val, y = y_val)) +
                    facet_grid(facets = facet_formula,scales = "free",space = "free") + 
-                   geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+                   geom_errorbar(aes(y = Mean, ymin = ymin, ymax= ymax), 
                    data = dfs,color = bar_color, width = width_bar,size = size_bar) + 
                    geom_point(aes(y = Mean),color = bar_color, size = size_point, data = dfs) 
          }
@@ -148,7 +174,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
              facet_grid(facets = facet_formula,scales = "free",space = "free") + 
              geom_sina(size = size_point,shape = 21,alpha = alpha_point, color = points_color) +
              geom_point(aes(y = Mean), size = size_point, data = dfs) + 
-              geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+              geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
                     data = dfs, width = width_bar,size = size_bar)  
           p <- p + scale_color_manual(values = mpalette)
 
@@ -157,7 +183,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
           facet_grid(facets = facet_formula,scales = "free",space = "free") + 
           geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
             geom_point(aes(y = Mean), size = size_point, data = dfs) + 
-            geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+            geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
                       data = dfs, width = width_bar,size = size_bar)
           p <- p + scale_color_manual(values = mpalette)
       
@@ -166,7 +192,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
           facet_grid(facets = facet_formula,scales = "free",space = "free") + 
           geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
           geom_point(aes(y = Mean), size = size_point, data = dfs,color = bar_color) + 
-          geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+          geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
                       data = dfs, width = width_bar,size = size_bar,color = bar_color) 
            p <- p + scale_color_manual(values = mpalette)
 
@@ -175,7 +201,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
           facet_grid(facets = facet_formula,scales = "free",space = "free") + 
           geom_sina(size = size_point,shape = 21,alpha = alpha_point,color = points_color) +
           geom_point(aes(y = Mean), size = size_point, data = dfs,color = "#414141") + 
-          geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+          geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
                       data = dfs, width = width_bar,size = size_bar,color = "#414141") 
     
         } 
