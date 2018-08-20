@@ -8,6 +8,7 @@
 
 chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
 	mpalette=NULL,facet_formula=NULL,
+  df_stats == NULL,mean_var = NULL,ymin_var = NULL, ymax_var = NULL,
 	show_points = TRUE , color_points = FALSE, color_bar = TRUE,
   bar_color = "#414141",points_color = "#414141",size_point=10,
   alpha_point=0.3,stroke_point=0.5,size_bar=2,width_bar = 0.2,
@@ -25,6 +26,8 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
   if(is.null(facet_formula)){
   #No facet
   #Compute the statistics for each level on x_val based on y_val
+  #Evaluate if no dfstats passed
+  if(is.null(df_stats)){
    f1 <- formula(paste0(y_val,"~",x_val))
    tdf <- aggregate(f1,Map,
           FUN = function(x) c(mmean = mean(x),
@@ -33,17 +36,38 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
    dfs <- data.frame(Id = tdf[[1]],Mean = tdf[[2]][,1],
              Median = tdf[[2]][,2], SD = tdf[[2]][,3])
    colnames(dfs)[1] <- x_val
+   dfs$ymax <- dfs$Means + dfs$SD
+   dfs$ymin <- dfs$Means - dfs$SD
+  }else{
+    #Check the names of the xval
+    if(is.null(mean_var) | is.null(ymin_var) | is.null(ymax_var)){
+      stop("ERROR: When passing df_stats you should give me the names of the variables with the mean,ymin and ymax",call.=TRUE)
+    }
+    #Check if exists the x_val in the passed stats data.frame
+    if(length(which(colnames(df) == x_val)) == 0){
+            stop("ERROR: The x_val you chose is not present as column in the df_stats you passed. Please add it",call.=TRUE)
+
+    }
+    dfs <- df_stats
+    colnames(dfs)[which(colnames(dfs) == mean_var)] <- "Mean"
+    colnames(dfs)[which(colnames(dfs) == ymin_var)] <- "ymin"
+    colnames(dfs)[which(colnames(dfs) == ymax_var)] <- "ymax"
+    #Adjust the levels to be consistent
+    niv <- levels(Map[,which(colnames(Map) == x_val)])
+    df[,which(colnames(df)==x_val)] <- factor(df[,which(colnames(df) == x_val)],levels = niv)
+  }
+
     #Here evaluate the different styles
     if(show_points == FALSE){
       if (color_bar == TRUE){
         p <- ggplot(data = Map,aes_string(x = x_val, y = y_val, color = x_val)) +
-		      geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+		      geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
           data = dfs, width = width_bar,size = size_bar) + 
           geom_point(aes(y = Mean), size = size_point, data = dfs) 
 	      p <- p + scale_color_manual(values = mpalette)
       }else{
         p <- ggplot(data = Map,aes_string(x = x_val, y = y_val)) +
-               geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+               geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
                data = dfs,color = bar_color, width = width_bar,size = size_bar) + 
                geom_point(aes(y = Mean),color = bar_color, size = size_point, data = dfs) 
 	   }
@@ -52,7 +76,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
         p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
            geom_sina(size = size_point,shape = 21,alpha = alpha_point, color = points_color) +
            geom_point(aes(y = Mean), size = size_point, data = dfs) + 
-            geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+            geom_errorbar(aes(y = Mean, ymin = ymin , ymax=ymax), 
                   data = dfs, width = width_bar,size = size_bar)	
         p <- p + scale_color_manual(values = mpalette)
 
@@ -60,7 +84,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
   		  p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
   			geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
   			  geom_point(aes(y = Mean), size = size_point, data = dfs) + 
-  			  geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+  			  geom_errorbar(aes(y = Mean, ymin = ymin , ymax= ymax), 
   	                data = dfs, width = width_bar,size = size_bar)
         p <- p + scale_color_manual(values = mpalette)
 		
@@ -68,7 +92,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
     		p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val, color = x_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point) +
     		geom_point(aes(y = Mean), size = size_point, data = dfs,color = bar_color) + 
-    		geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+    		geom_errorbar(aes(y = Mean, ymin = ymin, ymax= ymax), 
                     data = dfs, width = width_bar,size = size_bar,color = bar_color) 
     	   p <- p + scale_color_manual(values = mpalette)
 
@@ -76,7 +100,7 @@ chibi.sina <- function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,
     		p <- ggplot(data = Map,aes_string(x = x_val ,y = y_val)) +
     		geom_sina(size = size_point,shape = 21,alpha = alpha_point,color = points_color) +
     		geom_point(aes(y = Mean), size = size_point, data = dfs,color = "#414141") + 
-    		geom_errorbar(aes(y = Mean, ymin = Mean - SD , ymax= Mean + SD), 
+    		geom_errorbar(aes(y = Mean, ymin = ymin, ymax= ymax), 
                     data = dfs, width = width_bar,size = size_bar,color = "#414141") 
   
       } 
