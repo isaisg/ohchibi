@@ -29,10 +29,10 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
   Tab[, colname] <- row.names(Tab)
   if (!is.null(Map) & !is.null(facet)) {
     Map <- Map[row.names(Tab), ]
-    colname <- c(colname, names(Map))
+    colnamep <- c(colname, names(Map))
     Tab <- cbind(Tab, Map)
   }
-  Dat <- melt(Tab, id.vars = colname, variable.name = variable.name, 
+  Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name, 
               value.name = value.name)
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
       fill = variable.name)) + geom_bar(stat = "identity", 
@@ -59,6 +59,11 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
     p1 <- p1 + facet_grid(facet, scales = scales, space = space)
   }
   p1 <- p1 + guides(fill = guide_legend(nrow = nrow.legend))
+  #Here evaluate if the mformula was passed at all
+  if( is.null(mformula) ){
+    toret=list(p_raw = p1)
+    return(toret)
+  }else{
   #Take the Dat object and aggregate based on the given facette
   ##Do the mean
   #Remove white spaces from the formula if provided
@@ -98,6 +103,8 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
   }
   toret=list(p_raw = p1, p_mean=p2)
   return(toret)
+  }
+ 
 }
 
 
