@@ -102,7 +102,7 @@ chibi.phylogram<-function (Tab, Map = NULL, facet_formula = NULL, colname = "Sam
           legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
           strip.background = element_blank(),
           )
-  if (!is.null(Map) & !is.null(facet)) {
+  if (!is.null(Map) & !is.null(facet_formula)) {
     p2 <- p2 + facet_grid(facet_formula, scales = scales, space = space)
   }
   toret=list(p_raw = p1, p_mean=p2)
