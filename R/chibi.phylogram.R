@@ -7,11 +7,15 @@
 #' chibi.phylogram()
 
 
-chibi.phylogram<-function (Tab, Map = NULL, facet_formula = NULL, colname = "Sample", 
+chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname = "Sample", 
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
                         space = "free_x", nrow.legend = 20, ntaxa = NULL, 
                         other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
                         size_axis_title=30,size_legend_text=20,size_strip_text=10) {
+  #Die if not Tab and Map was passed
+  if(is.null(Tab) ){
+      stop("ERROR: You should at least pass a Matrix (Tab)",call.=TRUE)
+  }
   #Taken from AMOR Phylogram structure
   if (is.numeric(ntaxa)) {
     if (nrow(Tab) > ntaxa) {
