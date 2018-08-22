@@ -7,10 +7,10 @@
 #' chibi.phylogram()
 
 
-chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample", 
+chibi.phylogram<-function (Tab, Map = NULL, facet_formula = NULL, colname = "Sample", 
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
                         space = "free_x", nrow.legend = 20, ntaxa = NULL, 
-                        other_name = "other",mformula=NULL,funsum="mean",y_vjust=0.5,size_axis_text=20,
+                        other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
                         size_axis_title=30,size_legend_text=20,size_strip_text=10) {
   #Taken from AMOR Phylogram structure
   if (is.numeric(ntaxa)) {
@@ -27,7 +27,7 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
   Tab <- as.data.frame(t(Tab))
   measure.vars <- names(Tab)
   Tab[, colname] <- row.names(Tab)
-  if (!is.null(Map) & !is.null(facet)) {
+  if (!is.null(Map) & !is.null(facet_formula)) {
     Map <- Map[row.names(Tab), ]
     colnamep <- c(colname, names(Map))
     Tab <- cbind(Tab, Map)
@@ -58,23 +58,24 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
           legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
           strip.background = element_blank(),
           )
-  if (!is.null(Map) & !is.null(facet)) {
-    p1 <- p1 + facet_grid(facet, scales = scales, space = space)
+  if (!is.null(Map) & !is.null(facet_formula)) {
+    mformula <- gsub(pattern = " ",replacement = "",x = facet_formula)
+    facet_formula <- as.formula(paste("~", facet_formula))
+    p1 <- p1 + facet_grid(facet_formula, scales = scales, space = space)
   }
   p1 <- p1 + guides(fill = guide_legend(nrow = nrow.legend))
   #Here evaluate if the mformula was passed at all
-  if( is.null(mformula) ){
+  if( is.null(facet_formula) ){
     toret=list(p_raw = p1)
     return(toret)
   }else{
   #Take the Dat object and aggregate based on the given facette
   ##Do the mean
   #Remove white spaces from the formula if provided
-  mformula<-gsub(pattern = " ",replacement = "",x = mformula)
-  formula<-as.formula(paste0("Abundance ~ Taxon +",mformula))
-  temp<-aggregate(formula,data=Dat,funsum)
-  cols_pick<-unlist(strsplit(x = mformula,split = "\\+"))
-  temp2<-temp[,match(cols_pick,colnames(temp))]
+  formula <- as.formula(paste0("Abundance ~ Taxon +",mformula))
+  temp <- aggregate(formula,data=Dat,funsum)
+  cols_pick <- unlist(strsplit(x = mformula,split = "\\+"))
+  temp2 <- temp[,match(cols_pick,colnames(temp))]
   if(is.null(dim(temp2))){
     temp$Sample<-temp2
   }else{
@@ -102,7 +103,7 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
           strip.background = element_blank(),
           )
   if (!is.null(Map) & !is.null(facet)) {
-    p2 <- p2 + facet_grid(facet, scales = scales, space = space)
+    p2 <- p2 + facet_grid(facet_formula, scales = scales, space = space)
   }
   toret=list(p_raw = p1, p_mean=p2)
   return(toret)
