@@ -34,7 +34,7 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
     Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name, 
               value.name = value.name)
   }else{
-    Dat <- melt(Tab, id.vars = coname, variable.name = variable.name, 
+    Dat <- melt(Tab, id.vars = colname, variable.name = variable.name, 
               value.name = value.name)
   }
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
