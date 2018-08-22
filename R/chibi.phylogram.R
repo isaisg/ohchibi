@@ -31,9 +31,12 @@ chibi.phylogram<-function (Tab, Map = NULL, facet = NULL, colname = "Sample",
     Map <- Map[row.names(Tab), ]
     colnamep <- c(colname, names(Map))
     Tab <- cbind(Tab, Map)
-  }
-  Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name, 
+    Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name, 
               value.name = value.name)
+  }else{
+    Dat <- melt(Tab, id.vars = coname, variable.name = variable.name, 
+              value.name = value.name)
+  }
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
       fill = variable.name)) + geom_bar(stat = "identity", 
     position = "fill", width = 2) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
