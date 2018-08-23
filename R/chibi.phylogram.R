@@ -9,9 +9,9 @@
 
 chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname = "Sample", 
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
-                        space = "free_x", nrow.legend = 20, ntaxa = NULL, 
+                        space = "free_x",width_bars = 0.5,spacing_x = 0.5,legend_proportion_size =2, nrow.legend = 20, ntaxa = NULL,
                         other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
-                        size_axis_title=30,size_legend_text=20,size_strip_text=10) {
+                        size_axis_title=30,size_legend_text=20,size_strip_text=10,size_ticks_x = 2.5,size_ticks_y =2.5) {
   #Die if not Tab and Map was passed
   if(is.null(Tab) ){
       stop("ERROR: You should at least pass a Matrix (Tab)",call.=TRUE)
@@ -43,20 +43,20 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   }
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
       fill = variable.name)) + geom_bar(stat = "identity", 
-    position = "fill", width = 2) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
+    position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(axis.line = element_blank(),
           panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          panel.spacing.x = unit(0, "lines"),
+          panel.spacing.x = unit(spacing_x, "lines"),
           panel.border = element_blank(),
-          axis.ticks.y =element_line(colour = "black",size = 2.5),
-          axis.ticks.x =element_line(colour = "black",size = 2.5),
+          axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
+          axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
           axis.text.x =element_blank(),
           axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text,colour="#414141",vjust = y_vjust),
           axis.title.x = element_text(family = "AvantGarde",face="plain",size = size_axis_title,colour = "#414141"),
           axis.title.y = element_text(family = "AvantGarde",face="plain",size=size_axis_title,colour="#414141"),
-          legend.background = element_blank(),legend.key.size = unit(2,"line"),
+          legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
           legend.title=element_blank(),legend.key = element_blank(),
           legend.text = element_text(size=size_legend_text,family = "AvantGarde",face = "plain",colour = "#414141"),
           legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
@@ -87,20 +87,20 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   }
   p2 <- ggplot(temp, aes_string(x = "Sample", y = "Abundance", 
     fill = "Taxon")) + geom_bar(stat = "identity", 
-      position = "fill", width = 2) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
+      position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(axis.line = element_blank(),
           panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          panel.spacing.x = unit(0, "lines"),
+          panel.spacing.x = unit(spacing_x, "lines"),
           panel.border = element_blank(),
-          axis.ticks.y =element_line(colour = "black",size = 2.5),
-          axis.ticks.x =element_line(colour = "black",size = 2.5),
+          axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
+          axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
           axis.text.x =element_blank(),
           axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text,colour="#414141",vjust = y_vjust),
           axis.title.x = element_text(family = "AvantGarde",face="plain",size = size_axis_title,colour = "#414141"),
           axis.title.y = element_text(family = "AvantGarde",face="plain",size=size_axis_title,colour="#414141"),
-          legend.background = element_blank(),legend.key.size = unit(2,"line"),
+          legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,,"line"),
           legend.title=element_blank(),legend.key = element_blank(),
           legend.text = element_text(size=size_legend_text,family = "AvantGarde",face = "plain",colour = "#414141"),
           legend.position ="right",strip.text.x = element_text(family = "AvantGarde",colour = "#414141",size = size_strip_text),
