@@ -45,12 +45,7 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
       fill = variable.name)) + geom_bar(stat = "identity", 
     position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
-          #axis.line = element_blank(),
-          #panel.background = element_blank(),
-          #panel.grid.major = element_blank(),
-          #panel.grid.minor = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
-          #panel.border = element_blank(),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
           axis.text.x =element_blank(),
@@ -90,12 +85,7 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
     fill = "Taxon")) + geom_bar(stat = "identity", 
       position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
-          #axis.line = element_blank(),
-          #panel.background = element_blank(),
-          #panel.grid.major = element_blank(),
-          #panel.grid.minor = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
-          #panel.border = element_blank(),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
           axis.text.x =element_blank(),
