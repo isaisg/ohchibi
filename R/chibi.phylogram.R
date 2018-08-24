@@ -44,7 +44,8 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
       fill = variable.name)) + geom_bar(stat = "identity", 
     position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
-    theme(axis.line = element_blank(),
+    theme(
+          #axis.line = element_blank(),
           #panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
@@ -88,7 +89,8 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   p2 <- ggplot(temp, aes_string(x = "Sample", y = "Abundance", 
     fill = "Taxon")) + geom_bar(stat = "identity", 
       position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
-    theme(axis.line = element_blank(),
+    theme(
+          #axis.line = element_blank(),
           #panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
