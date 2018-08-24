@@ -9,7 +9,7 @@
 
 chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname = "Sample", 
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
-                        space = "free_x",width_bars = 2,spacing_x = 0.5,legend_proportion_size =2, nrow.legend = 20, ntaxa = NULL,
+                        space = "free_x",width_bars = 1,spacing_x = 0.4,legend_proportion_size =2, nrow.legend = 20, ntaxa = NULL,
                         other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
                         size_axis_title=30,size_legend_text=20,size_strip_text=10,size_ticks_x = 2.5,size_ticks_y =2.5) {
   #Die if not Tab and Map was passed
@@ -45,6 +45,11 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
       fill = variable.name)) + geom_bar(stat = "identity", 
     position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
+          axis.line = element_blank(),
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
@@ -85,6 +90,11 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
     fill = "Taxon")) + geom_bar(stat = "identity", 
       position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
+          axis.line = element_blank(),
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
