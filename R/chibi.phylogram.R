@@ -47,8 +47,8 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
     theme(
           #axis.line = element_blank(),
           #panel.background = element_blank(),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
+          #panel.grid.major = element_blank(),
+          #panel.grid.minor = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
           #panel.border = element_blank(),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
@@ -92,8 +92,8 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
     theme(
           #axis.line = element_blank(),
           #panel.background = element_blank(),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
+          #panel.grid.major = element_blank(),
+          #panel.grid.minor = element_blank(),
           panel.spacing.x = unit(spacing_x, "lines"),
           #panel.border = element_blank(),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
