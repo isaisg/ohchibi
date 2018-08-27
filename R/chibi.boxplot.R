@@ -14,7 +14,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                         alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2,
                         size_axis_text.x=20,size_axis_text.y=20,size_axis_title.x=30,size_axis_title.y=30,
                         size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
-			size_lines_panel = 0.3,size_panel_border = 1){
+			size_lines_panel = 0.3,size_panel_border = 1,font_family = "AvantGarde"){
   if(is.null(mpalette)){
     mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
       "#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
@@ -918,14 +918,14 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           panel.grid.minor.y = element_line(colour = "#D9D9D9",size=size_lines_panel),
           panel.border = element_rect(fill=NA,color =  "#414141",size = size_panel_border),
           axis.ticks = element_line(colour = "black",size = 2.5),
-          axis.text.x = element_text(family = "AvantGarde",face = "plain",size =size_axis_text.x,colour="#414141",angle = 0),
-          axis.text.y = element_text(family = "AvantGarde",face="plain",size=size_axis_text.y,colour="#414141"),
-          axis.title.x = element_text(family = "AvantGarde",face="plain",size = size_axis_title.x,colour = "#414141"),
-          axis.title.y = element_text(family = "AvantGarde",face="plain",size=size_axis_title.y,colour="#414141"),
+          axis.text.x = element_text(family = font_family,face = "plain",size =size_axis_text.x,colour="#414141",angle = 0),
+          axis.text.y = element_text(family = font_family,face="plain",size=size_axis_text.y,colour="#414141"),
+          axis.title.x = element_text(family = font_family,face="plain",size = size_axis_title.x,colour = "#414141"),
+          axis.title.y = element_text(family = font_family,face="plain",size=size_axis_title.y,colour="#414141"),
           legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
           legend.title=element_blank(),legend.key = element_blank(), 
-          legend.text = element_text(size=size_legend_text,family = "AvantGarde",face = "plain",colour = "#414141"),
-          legend.position ="right",strip.text = element_text(family = "AvantGarde",colour = "#414141",size = strip_text_size),
+          legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
+          legend.position ="right",strip.text = element_text(family = font_family,colour = "#414141",size = strip_text_size),
           strip.background = element_blank()) 
   return(p)
 }
