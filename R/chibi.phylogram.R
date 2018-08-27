@@ -11,7 +11,7 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
                         variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
                         space = "free_x",width_bars = 1,spacing_x = 0.4,legend_proportion_size =2, nrow.legend = 20, ntaxa = NULL,
                         other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
-                        size_axis_title=30,size_legend_text=20,size_strip_text=10,size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "AvantGarde") {
+                        size_axis_title=30,size_legend_text=20,size_strip_text=10,size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial") {
   #Die if not Tab and Map was passed
   if(is.null(Tab) ){
       stop("ERROR: You should at least pass a Matrix (Tab)",call.=TRUE)

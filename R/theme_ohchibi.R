@@ -10,7 +10,7 @@
 theme_ohchibi <- function (size_axis_text = 20, size_axis_title = 30,
                            legend_proportion_size = 4,size_legend_text = 20,
                            size_lines_panel = 0.3,size_panel_border = 1,
-                           x_hjust = 0.5, y_vjust = 0.5,font_family = "AvantGarde") { 
+                           x_hjust = 0.5, y_vjust = 0.5,font_family = "Arial") { 
   theme(axis.line = element_blank(),
         panel.background = element_rect(fill = 'white'),
         panel.grid.major.y = element_line(colour =   "#D9D9D9",size=size_lines_panel),
