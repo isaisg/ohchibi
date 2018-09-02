@@ -11,7 +11,8 @@ theme_ohchibi <- function (size_axis_text.x = 20,size_axis_text.y = 20,
                            size_axis_title.x = 30,size_axis_title.y = 30,
                            angle_text.x = 0,angle_text.y = 0,
                            legend_proportion_size = 4,size_legend_text = 20,
-                           size_title_text = 30,
+                           strip.text.x = 30,
+                           strip.text.y = 30
                            size_lines_panel = 0.3,size_panel_border = 1,
                            x_hjust = 0.5, y_vjust = 0.5,font_family = "Arial") { 
   theme(axis.line = element_blank(),
@@ -31,7 +32,10 @@ theme_ohchibi <- function (size_axis_text.x = 20,size_axis_text.y = 20,
         legend.key = element_blank(), 
         legend.text = element_text(size=size_legend_text,
           family = font_family,face = "plain",colour = "#414141"),
-        legend.position ="right"
+        legend.position ="right",
+        strip.text.x = element_text(family = font_family,colour = "#414141",size = size_strip_text.x),
+        strip.text.y = element_text(family = font_family,colour = "#414141",size = size_strip_text.y),
+          strip.background = element_blank()
         )
 }
 
