@@ -13,7 +13,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                         mypch_point=21,size_point=4,
                         alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2,
                         size_axis_text.x=20,size_axis_text.y=20,size_axis_title.x=30,size_axis_title.y=30,
-                        size_legend_text=20,strip_text_size=20,legend_proportion_size=2,
+                        size_legend_text=20,size_title_text = 30,strip_text_size=20,legend_proportion_size=2,
 			size_lines_panel = 0.3,size_panel_border = 1,font_family = "Arial"){
   if(is.null(mpalette)){
     mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
@@ -923,7 +923,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           axis.title.x = element_text(family = font_family,face="plain",size = size_axis_title.x,colour = "#414141"),
           axis.title.y = element_text(family = font_family,face="plain",size=size_axis_title.y,colour="#414141"),
           legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
-          legend.title=element_blank(),legend.key = element_blank(), 
+          legend.title=element_text(size=size_title_text,
+          family = font_family,face = "plain",colour = "#414141"),
+          legend.key = element_blank(), 
           legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
           legend.position ="right",strip.text = element_text(family = font_family,colour = "#414141",size = strip_text_size),
           strip.background = element_blank()) 
