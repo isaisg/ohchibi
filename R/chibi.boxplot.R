@@ -848,7 +848,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               mcolors <- NULL
               for(level in levels(map_melted$Combined)){
                 sub_temp <- map_melted[which(map_melted$Combined==level),]
-                mcolors <- c(mcolors,rev(as.character(refdf[match(sub_temp[,2],refdf[,1]),2])))
+                mcolors <- c(mcolors,(as.character(refdf[match(sub_temp[,2],refdf[,1]),2])))
               }
               if(median_colored_as_points == FALSE){
                 dat$colour <- rep(median_color,nrow(dat))
