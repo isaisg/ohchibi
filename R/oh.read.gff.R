@@ -9,7 +9,7 @@
 
 
 
-oh.read.gff <- function(file = NULL,withOGs = FLASE){
+oh.read.gff <- function(file = NULL,withOGs = FALSE){
   if(withOGs == TRUE){
     tfile <- read.table(file = file,header = F,
           skip = 1,comment.char = "",quote = "",sep = "\t")
