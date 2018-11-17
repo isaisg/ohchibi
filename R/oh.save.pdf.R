@@ -1,6 +1,6 @@
 #' Function to save objects in high resolution. To be used with illustrator
 #'
-#' Pass any type of figure
+#' Pass any type of figure. 
 #' @keywords save,figure,illustrator,vectorized
 #' @export
 #' @examples
