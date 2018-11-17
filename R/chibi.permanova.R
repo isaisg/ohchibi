@@ -6,8 +6,9 @@
 #' @examples
 #' chibi.permanova()
 
-#Assay for addendum for chibi.cap
-chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05){
+chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05,legend_proportion_size =2,
+y_vjust=0.5,size_axis_text=20,size_axis_title=30,size_legend_text=20,size_title_text = 30,
+size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial",aspect.ratio =3){
   pval_thres <- pval_thres
   df_aov <- mypermanova$aov.tab %>% as.data.frame
   colnames(df_aov)[6] <- "pvalue"
@@ -29,8 +30,26 @@ chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05){
   df_plot$R2 <- df_plot$R2*100
   p_var <- ggplot(data = df_plot, aes(x = Description,y = R2, fill = Term)) +
     geom_bar(stat = "identity") + ylab(label = "Variance Explained (%)") +
-    theme_ohchibi(size_axis_title.x = 0) + theme(aspect.ratio = 3) +
+     theme(aspect.ratio = aspect.ratio) +
     scale_y_continuous(breaks=seq(0,100,10)) +
-    coord_cartesian(ylim = c(0,100), expand = FALSE)
+    coord_cartesian(ylim = c(0,100), expand = FALSE) +
+    theme(
+          panel.background = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank(),
+          axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
+          axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
+          axis.text.x =element_blank(),
+          axis.text.y = element_text(family = font_family,face="plain",size=size_axis_text,colour="#414141",vjust = y_vjust),
+          axis.title.x = element_text(family = font_family,face="plain",size = size_axis_title,colour = "#414141"),
+          axis.title.y = element_text(family = font_family,face="plain",size=size_axis_title,colour="#414141"),
+          legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
+          legend.title=element_text(size=size_title_text,
+          family = font_family,face = "plain",colour = "#414141"),
+          legend.key = element_blank(),
+          legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
+          legend.position ="right"
+          )
   return(p_var)
 }

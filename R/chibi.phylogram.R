@@ -1,14 +1,14 @@
-#' Plots a proportion barplot(phylogram) 
+#' Plots a proportion barplot(phylogram)
 #'
-#' 
+#'
 #' @keywords phylogram
 #' @export
 #' @examples
 #' chibi.phylogram()
 
 
-chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname = "Sample", 
-                        variable.name = "Taxon", value.name = "Abundance", scales = "free_x", 
+chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname = "Sample",
+                        variable.name = "Taxon", value.name = "Abundance", scales = "free_x",
                         space = "free_x",width_bars = 1,spacing_x = 0.4,legend_proportion_size =2, nrow.legend = 20, ntaxa = NULL,
                         other_name = "Other",funsum="mean",y_vjust=0.5,size_axis_text=20,
                         size_axis_title=30,size_legend_text=20,size_title_text = 30,size_strip_text=10,size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial") {
@@ -24,7 +24,7 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
       select <- names(select)[1:ntaxa]
       groups <- row.names(Tab)
       groups[!(groups %in% select)] <- other_name
-      Tab <- collapse_matrix(x = Tab, groups = groups, 
+      Tab <- collapse_matrix(x = Tab, groups = groups,
                              dim = 1, FUN = sum)
     }
   }
@@ -35,14 +35,14 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
     Map <- Map[row.names(Tab), ]
     colnamep <- c(colname, names(Map))
     Tab <- cbind(Tab, Map)
-    Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name, 
+    Dat <- melt(Tab, id.vars = colnamep, variable.name = variable.name,
               value.name = value.name)
   }else{
-    Dat <- melt(Tab, id.vars = colname, variable.name = variable.name, 
+    Dat <- melt(Tab, id.vars = colname, variable.name = variable.name,
               value.name = value.name)
   }
-  p1 <- ggplot(Dat, aes_string(x = colname, y = value.name, 
-      fill = variable.name)) + geom_bar(stat = "identity", 
+  p1 <- ggplot(Dat, aes_string(x = colname, y = value.name,
+      fill = variable.name)) + geom_bar(stat = "identity",
     position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
           axis.line = element_blank(),
@@ -88,8 +88,8 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   }else{
     temp$Sample<-factor(apply(temp2,1,paste,collapse="_"))
   }
-  p2 <- ggplot(temp, aes_string(x = "Sample", y = "Abundance", 
-    fill = "Taxon")) + geom_bar(stat = "identity", 
+  p2 <- ggplot(temp, aes_string(x = "Sample", y = "Abundance",
+    fill = "Taxon")) + geom_bar(stat = "identity",
       position = "fill", width = width_bars) + coord_cartesian( ylim=c(0,1), expand = FALSE ) +
     theme(
           axis.line = element_blank(),
@@ -118,7 +118,5 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   toret=list(p_raw = p1, p_mean=p2)
   return(toret)
   }
- 
+
 }
-
-
