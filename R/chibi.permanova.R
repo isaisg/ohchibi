@@ -1,7 +1,7 @@
 #' Plots results from adonis output
 #'
 #' Uses the aov table contained in out by adonis
-#' @keywords adonis,permanova
+#' @keywords adonis,permanova,plot
 #' @export
 #' @examples
 #' chibi.permanova()
