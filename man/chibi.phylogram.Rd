@@ -4,12 +4,15 @@
 \alias{chibi.phylogram}
 \title{Plots a proportion barplot(phylogram)}
 \usage{
-chibi.phylogram(Tab, Map = NULL, facet = NULL, colname = "Sample",
-  variable.name = "Taxon", value.name = "Abundance", scales = "free_x",
-  space = "free_x", nrow.legend = 20, ntaxa = NULL,
-  other_name = "other", mformula = NULL, funsum = "mean", y_vjust = 0.5,
-  size_axis_text = 20, size_axis_title = 30, size_legend_text = 20,
-  size_strip_text = 10)
+chibi.phylogram(Tab = NULL, Map = NULL, facet_formula = NULL,
+  colname = "Sample", variable.name = "Taxon",
+  value.name = "Abundance", scales = "free_x", space = "free_x",
+  width_bars = 1, spacing_x = 0.4, legend_proportion_size = 2,
+  nrow.legend = 20, ntaxa = NULL, other_name = "Other",
+  funsum = "mean", y_vjust = 0.5, size_axis_text = 20,
+  size_axis_title = 30, size_legend_text = 20, size_title_text = 30,
+  size_strip_text = 10, size_ticks_x = 2.5, size_ticks_y = 2.5,
+  font_family = "Arial")
 }
 \description{
 Plots a proportion barplot(phylogram)
