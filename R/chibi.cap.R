@@ -1,7 +1,7 @@
 #' Plots results from oh.cap
 #'
 #' Uses the structure return from oh.cap to automatically plot a scatterplot colored by variables from the Map structured used to compute oh.cap
-#' @keywords cap,chibi
+#' @keywords cap,chibi,plot
 #' @export
 #' @examples
 #' chibi.cap()
