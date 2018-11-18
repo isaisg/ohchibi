@@ -8,13 +8,14 @@
 
 
 chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp_b=NULL,mypch=21,
-        size=25,alpha=0.7,stroke=1.5,col_shape_background="white",alpha_shape_background=0,
+        size=25,alpha=0.7,stroke=1.5,col_shape_background="white",alpha_shape_background=0,lines_zero = FALSE,
         ratio_size_shape_background=1.3,y_vjust=0.5,x_hjust=0.5,size_axis_text=20,size_axis_title=30,
         size_legend_text=20,size_title_text = 30,legend_proportion_size=2,size_lines_panel = 0.3,size_panel_border = 1,font_family = "Arial"){
   percvar<-list_ohpco$variance_explained_axis
   Map_cap<-list_ohpco$Map_cap
   vartot<-list_ohpco$total_var
   pval<-list_ohpco$pval_model
+  if(lines_zero == FALSE){
     if(is.null(shape_val)){
     p <- ggplot(data = Map_cap,aes_string(x = comp_a,y = comp_b))+
       geom_point(size = size,alpha=alpha,pch=mypch,colour="#414141",stroke = stroke,aes_string(fill = col_val))+
@@ -68,5 +69,6 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
       #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
       return(p)
     }
+	}
 }
 
