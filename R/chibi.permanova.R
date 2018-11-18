@@ -37,7 +37,7 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
           panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          #panel.border = element_rect(colour = "black", size = size_panel_border),
+          panel.border = element_rect(colour = "black", size = size_panel_border, fill = NA),
           axis.ticks.y =element_line(colour = "black", size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black", size = size_ticks_x),
           axis.text.x =element_blank(),
