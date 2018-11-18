@@ -8,7 +8,7 @@
 
 chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05,legend_proportion_size =2,
 y_vjust=0.5,size_axis_text=20,size_axis_title=30,size_legend_text=20,size_title_text = 30,
-size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial",aspect.ratio =3){
+size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial",aspect.ratio =3,size_panel_border = 1){
   pval_thres <- pval_thres
   df_aov <- mypermanova$aov.tab %>% as.data.frame
   colnames(df_aov)[6] <- "pvalue"
@@ -37,7 +37,7 @@ size_ticks_x = 2.5,size_ticks_y =2.5,font_family = "Arial",aspect.ratio =3){
           panel.background = element_blank(),
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
-          panel.border = element_blank(),
+          panel.border = element_line(colour = "black",size = size_panel_border),
           axis.ticks.y =element_line(colour = "black",size = size_ticks_y),
           axis.ticks.x =element_line(colour = "black",size = size_ticks_x),
           axis.text.x =element_blank(),
