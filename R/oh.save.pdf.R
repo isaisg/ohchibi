@@ -13,7 +13,7 @@ oh.save.pdf <- function(p = NULL,outname = NULL,outdir = "figures/",
   myfilename <- paste(outdir, outname, sep = "/")
   cairo_pdf(filename = myfilename, onefile = FALSE, fallback_resolution = fallback_resolution, 
           width = width, height = height, family = family, antialias = antialias)
-  p
+  print(p)
   dev.off()
 
 }
