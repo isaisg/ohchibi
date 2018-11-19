@@ -25,12 +25,12 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         mpalette <- mpalette[1:length(levels(Map[,which(colnames(Map)==col_val)]))]
 
     }
-    
+
   }
   #Shape value should only make sense in the open style
   if(! is.null(shape_val) & style!="open"){
     stop("ERROR: the shape_val plotting is implement only in the open style. please change style=open",call.=TRUE)
-    
+
   }
   #Check if facet is requested
   if(! is.null(facet_formula)){
@@ -50,8 +50,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         ##Full Style no facet###
         ########################
         ########################
-        p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
-          geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) 
+        p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
+          geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
         p <- p + scale_fill_manual(values = mpalette)
         dat <- ggplot_build(p)$data[[1]]
         map_melted <- melt(table(Map[,which(colnames(Map)==x_val)],Map[,which(colnames(Map)==col_val)]))
@@ -59,7 +59,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         map_melted <- map_melted[which(map_melted$value!=0),]
         map_melted <- map_melted[order(map_melted[,1]),]
         refdf <- data.frame(col_val = levels(Map[,which(colnames(Map)==col_val)]),colors=mpalette)
-        
+
         mcolors <- NULL
         for(level in levels(map_melted[,1])){
           sub_temp <- map_melted[which(map_melted[,1]==level),]
@@ -67,16 +67,16 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         }
         if(median_colored_as_points == FALSE){
           dat$colour <- rep(median_color,nrow(dat))
-          
+
         }else{
           dat$colour <- mcolors
-          
+
         }
         p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                             y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-        p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+        p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
                                                           jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-        
+
 
       }else{
         ########################
@@ -87,8 +87,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         ########################
         if(col_val != x_val){
           if(lfacet == 1){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
@@ -112,16 +112,16 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               dat$colour <- rep(median_color,nrow(dat))
             }else{
               dat$colour <- mcolors
-              
+
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
                                                               jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-            
-            
+
+
           }else if (lfacet ==2){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
               geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
@@ -146,18 +146,18 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               dat$colour <- rep(median_color,nrow(dat))
             }else{
               dat$colour <- mcolors
-              
+
             }
-            
+
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
                                                               jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-            
-            
+
+
           }else{
             stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment constructing the figure manually",call.=TRUE)
-            
+
           }
         }else{
           ########################
@@ -167,8 +167,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           ########################
           if(lfacet == 1){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             #Change this part when facette is equal two
@@ -179,7 +179,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                                id.vars = c(1),variable.name = x_val)
             map_melted <- map_melted[which(map_melted$value!=0),]
             refdf <- data.frame(col_val = levels(Map[,which(colnames(Map)==col_val)]),colors=mpalette)
-            #change the next three lines when facette is equal to two 
+            #change the next three lines when facette is equal to two
             int_cols <- 1
             map_melted <- map_melted[order(map_melted[,int_cols[1]]),]
             combined <- paste(map_melted[,int_cols[1]],sep = "_")
@@ -195,17 +195,17 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }else{
               dat$colour <- mcolors
             }
-            
+
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
                                                               jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-            
-            
-            
+
+
+
           }else if (lfacet ==2){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) + 
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             #Change this part when facette is equal two
@@ -216,7 +216,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                                id.vars = c(1,2),variable.name = x_val)
             map_melted <- map_melted[which(map_melted$value!=0),]
             refdf <- data.frame(col_val = levels(Map[,which(colnames(Map)==col_val)]),colors=mpalette)
-            #change the next three lines when facette is equal to two 
+            #change the next three lines when facette is equal to two
             int_cols <- c(1,2)
             map_melted <- map_melted[order(map_melted[,int_cols[1]],map_melted[,int_cols[2]]),]
             combined <- paste(map_melted[,int_cols[1]],map_melted[,int_cols[2]],sep = "_")
@@ -234,20 +234,20 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, 
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
                                                               jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
-            
 
-            
+
+
           }else{
             stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment constructing the figure manually",call.=TRUE)
-            
+
           }
         }
- 
+
       }
-   
- 
+
+
     }
   }else if(style == "open"){
       if(is.null(col_val)){
@@ -259,22 +259,22 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           ########################
           #This is the black style with red medians. Great when there are a lot of points such as RNA-Seq
-          p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+          p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
             geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
           dat <- ggplot_build(p)$data[[1]]
-          p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+          p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                               y=middle, yend=middle), colour=median_color, size=size_median)
           if(is.null(shape_val)){
             p  <- p + geom_jitter(position = position_jitter(0.2),
                                   size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
-            
-            
+
+
           }else{
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                               size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
-            
+
           }
-          
+
         }else{
           ########################
           ########################
@@ -283,8 +283,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           ########################
           if(lfacet == 1){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
-              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot) 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
+              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
             red_formula <- as.formula(paste(red_formula,"~",as.character(x_val),sep = " "))
@@ -306,21 +306,21 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             dat$colour <- rep(median_color,nrow(dat))
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            
+
             if(is.null(shape_val)){
               p  <- p + geom_jitter(position = position_jitter(0.2),
                                     size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
-              
+
             }else{
-             
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
-              
+
             }
           }else if (lfacet ==2){
             #Open style no color when facetting equal to 2
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
-              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot) 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
+              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
             red_formula <- as.formula(paste(red_formula,"~",as.character(x_val),sep = " "))
@@ -346,20 +346,20 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
               p  <- p + geom_jitter(position = position_jitter(0.2),
                                     size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)
-              
+
             }else{
-            
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
 
             }
-            
+
           }else{
             stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment constructing the figure manually",call.=TRUE)
-            
+
           }
         }
-       
+
       }else{
         ########################
         ########################
@@ -370,7 +370,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         ########################
         if(col_val != x_val){
           if(is.null(facet_formula)){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) + 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) +
               geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
               geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)+
@@ -392,19 +392,19 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               dat$colour <- mcolors
             }
             if(is.null(shape_val)){
-             
+
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-              
-              
-              
+
+
+
             }else{
-              p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+              p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
             }
-            
+
           }else{
             ########################
             ########################
@@ -414,13 +414,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             ########################
             if(lfacet == 1){
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
@@ -444,29 +444,29 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 dat$colour <- mcolors
               }
-              
+
               if(is.null(shape_val)){
-                
+
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-                
-                
-                
+
+
+
               }else{
-                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
-              
+
             }else if (lfacet ==2){
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
@@ -491,21 +491,21 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- mcolors
               }
               if(is.null(shape_val)){
-                
+
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-                
-                
-                
+
+
+
               }else{
-                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
             }else{
               stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment constructing the figure manually",call.=TRUE)
-              
+
             }
           }
         }else{
@@ -517,7 +517,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           ########################
           if(is.null(facet_formula)){
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) + 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) +
               geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
               geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)+
@@ -539,16 +539,16 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               dat$colour <- mcolors
             }
             if(is.null(shape_val)){
-              
+
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-              
-              
-              
+
+
+
             }else{
-              p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+              p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
             }
 
@@ -561,13 +561,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             ########################
             if(lfacet == 1){
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"~",as.character(col_val),sep = " "))
@@ -591,29 +591,29 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 dat$colour <- mcolors
               }
-              
+
               if(is.null(shape_val)){
-                
+
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-                
-                
-                
+
+
+
               }else{
-                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
-              
+
             }else if (lfacet ==2){
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"~",as.character(col_val),sep = " "))
@@ -638,24 +638,24 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- mcolors
               }
               if(is.null(shape_val)){
-                
+
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-                
-                
-                
+
+
+
               }else{
-                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax, 
+                p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1), 
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
             }else{
               stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment constructing the figure manually",call.=TRUE)
-              
+
             }
           }
-          
+
         }
 
 
@@ -672,13 +672,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             ########################
             myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
               geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-              scale_color_manual(values = rep("#414141",myrep)) + 
+              scale_color_manual(values = rep("#414141",myrep)) +
               geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
-              scale_fill_manual(values = mpalette) 
-            
+              scale_fill_manual(values = mpalette)
+
             dat <- ggplot_build(p)$data[[1]]
             map_melted <- melt(table(Map[,which(colnames(Map)==x_val)],Map[,which(colnames(Map)==col_val)]))
             colnames(map_melted)[1:2] <- c(x_val,col_val)
@@ -697,9 +697,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),colour=dat$colour,size=size_median)
-            
-            
-           
+
+
+
           }else{
             ########################
             ########################
@@ -709,13 +709,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             ########################
             myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
-            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+            p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
               geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-              scale_color_manual(values = rep("#414141",myrep)) + 
+              scale_color_manual(values = rep("#414141",myrep)) +
               geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
               scale_fill_manual(values = mpalette)
-            
+
             dat <- ggplot_build(p)$data[[1]]
             map_melted <- melt(acast(get(x_val)~get(col_val),data = Map,fun.aggregate = length,value.var = y_val,drop = T))
             colnames(map_melted)[1:2] <- c(x_val,col_val)
@@ -734,7 +734,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),colour=dat$colour,size=size_median)
-            
+
 
           }
         }else{
@@ -748,13 +748,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             if(lfacet == 1){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-                scale_color_manual(values = rep("#414141",myrep)) + 
+                scale_color_manual(values = rep("#414141",myrep)) +
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
@@ -777,20 +777,20 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- rep(median_color,nrow(dat))
               }else{
                 dat$colour <- mcolors
-              }            
+              }
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-              
-              
+
+
             }else if (lfacet ==2){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-                scale_color_manual(values = rep("#414141",myrep)) + 
+                scale_color_manual(values = rep("#414141",myrep)) +
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"+",as.character(col_val),"~",as.character(x_val),sep = " "))
@@ -813,14 +813,14 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- rep(median_color,nrow(dat))
               }else{
                 dat$colour <- mcolors
-              }                
+              }
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-              
-              
+
+
             }else{
               stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment to construct the figure manually",call.=TRUE)
-              
+
             }
           }else{
             ########################
@@ -832,13 +832,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             if(lfacet == 1){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-                scale_color_manual(values = rep("#414141",myrep)) + 
+                scale_color_manual(values = rep("#414141",myrep)) +
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"~",as.character(col_val),sep = " "))
@@ -861,20 +861,20 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- rep(median_color,nrow(dat))
               }else{
                 dat$colour <- mcolors
-              }            
+              }
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-              
-              
+
+
             }else if (lfacet ==2){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
-              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) + 
+              p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-                scale_color_manual(values = rep("#414141",myrep)) + 
+                scale_color_manual(values = rep("#414141",myrep)) +
                 geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
-              
+
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
               red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
               red_formula <- as.formula(paste(red_formula,"~",as.character(col_val),sep = " "))
@@ -897,24 +897,24 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                 dat$colour <- rep(median_color,nrow(dat))
               }else{
                 dat$colour <- mcolors
-              }                
+              }
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-              
-              
+
+
             }else{
               stop("ERROR: More than 2 variables in facetting  is not implemented yet. I recomment to construct the figure manually",call.=TRUE)
-              
+
             }
           }
-            
+
 
         }
 
-      
+
   }else{
     stop("ERROR: Unrecognized style, try mix (default), full or open.",call.=TRUE)
-    
+
     }
   #Add the theme style here
   p <- p +
@@ -932,10 +932,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
           legend.title=element_text(size=size_title_text,
           family = font_family,face = "plain",colour = "#414141"),
-          legend.key = element_blank(), 
+          legend.key = element_blank(),
           legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
           legend.position ="right",strip.text = element_text(family = font_family,colour = "#414141",size = strip_text_size),
-          strip.background = element_blank()) 
+          strip.background = element_blank())
   return(p)
 }
-
