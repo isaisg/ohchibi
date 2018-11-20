@@ -4,12 +4,12 @@
 \alias{oh.save.pdf}
 \title{Function to save objects in high resolution. To be used with illustrator}
 \usage{
-oh.save.pdf(object = NULL, outname = NULL, outdir = "figures/",
+oh.save.pdf(p = NULL, outname = NULL, outdir = "figures/",
   width = 20, height = 15, family = "Arial",
-  fallback_resolution = 1200, antialias = "default")
+  fallback_resolution = 1200, antialias = "default", pointsize = 12)
 }
 \description{
-Pass any type of figure
+Pass any type of figure.
 }
 \examples{
 oh.save.pdf()
