@@ -17,14 +17,16 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
   df_aov$Term <- rownames(df_aov) %>% factor
   df_aov$Description <- rep("Term",nrow(df_aov))
 
-  df_aov_res <- df_aov %>% subset(Term == "Residuals") %>% droplevels
   df_aov <- df_aov %>% subset(pvalue <= pval_thres)
-  df_aov <- rbind(df_aov,df_aov_res)
-
+  residual <- 1- sum(df_aov$R2)
   df_plot <- df_aov[,c(5:8)] %>% droplevels
   df_plot <- with(df_plot,order(VarExp)) %>% df_plot[.,]
-  df_plot$Term <- df_plot$Term %>%
-  factor(levels = c("Residuals",df_plot$Term %>% grep(pattern = "Residual",invert = T,value = T)))
+  ord_ele <- df_plot$Term %>% as.character
+  df_plot <- data.frame(R2 = residual,pvalue = 1,
+                        Term = "Residual",Description = "Term") %>%
+    rbind(df_plot,.)
+  df_plot$Term <- factor(df_plot$Term,levels = c("Residual",ord_ele))
+  rownames(df_plot) <- NULL
 
   p_var <- ggplot(data = df_plot, aes(x = Description,y = VarExp, fill = Term)) +
     geom_bar(stat = "identity") + ylab(label = "Variance Explained (%)") +
