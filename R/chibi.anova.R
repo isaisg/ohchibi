@@ -18,7 +18,7 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
   df_aov$Description <- rep("Term",nrow(df_aov))
 
   df_aov <- df_aov %>% subset(pvalue <= pval_thres)
-  residual <- 100- sum(df_aov$R2)
+  residual <- 100- sum(df_aov$VarExp)
   df_plot <- df_aov[,c(5:8)] %>% droplevels
   df_plot <- with(df_plot,order(VarExp)) %>% df_plot[.,]
   ord_ele <- df_plot$Term %>% as.character
