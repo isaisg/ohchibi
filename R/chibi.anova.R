@@ -22,7 +22,7 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
   df_plot <- df_aov[,c(5:8)] %>% droplevels
   df_plot <- with(df_plot,order(VarExp)) %>% df_plot[.,]
   ord_ele <- df_plot$Term %>% as.character
-  df_plot <- data.frame(R2 = residual,pvalue = 1,
+  df_plot <- data.frame(pvalue = 1,VarExp = residual,
                         Term = "Residual",Description = "Term") %>%
     rbind(df_plot,.)
   df_plot$Term <- factor(df_plot$Term,levels = c("Residual",ord_ele))
