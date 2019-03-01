@@ -31,7 +31,7 @@ terms_exclude_plot = NULL){
   df_plot$R2 <- df_plot$R2*100
   df_plot_original <- df_plot
   if(! is.null(terms_exclude_plot)){
-	df_plot <- which(!(df_plot$terms %in% terms_exclude_plot)) %>%
+	df_plot <- which(!(df_plot$Term %in% terms_exclude_plot)) %>%
 	 df_plot[.,] %>% droplevels
   }
   p_var <- ggplot(data = df_plot, aes(x = Description,y = R2, fill = Term)) +
