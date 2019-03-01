@@ -8,7 +8,8 @@
 
 chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05,legend_proportion_size =2,
 y_vjust=1,size_axis_text=20,size_axis_title=30,size_legend_text=20,size_title_text = 30,
-size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,size_panel_border = 0.1){
+size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,size_panel_border = 0.1,
+terms_exclude_plot = NULL){
   pval_thres <- pval_thres
   df_aov <- mypermanova$aov.tab %>% as.data.frame
   colnames(df_aov)[6] <- "pvalue"
@@ -28,6 +29,11 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
   df_plot$Term <- factor(df_plot$Term,levels = c("Residual",ord_ele))
   rownames(df_plot) <- NULL
   df_plot$R2 <- df_plot$R2*100
+  df_plot_original <- df_plot
+  if(! is.null(terms_exclude_plot){
+	df_plot <- which(!(df_plot$terms %in% terms_exclude_plot)) %>%
+	 df_plot[.,] %>% droplevels
+  }
   p_var <- ggplot(data = df_plot, aes(x = Description,y = R2, fill = Term)) +
     geom_bar(stat = "identity") + ylab(label = "Variance Explained (%)") +
      theme(aspect.ratio = aspect.ratio) +
@@ -51,5 +57,5 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
           legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
           legend.position ="right"
           )
-  return(list(df = df_plot,p = p_var))
+  return(list(df = df_plot_original,p = p_var))
 }
