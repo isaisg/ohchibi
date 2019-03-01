@@ -51,5 +51,5 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,siz
           legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "#414141"),
           legend.position ="right"
           )
-  return(p_var)
+  return(list(df = df_plot,p = p_var))
 }
