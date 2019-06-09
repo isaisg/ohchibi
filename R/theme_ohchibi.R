@@ -14,7 +14,7 @@ theme_ohchibi <- function (size_axis_text.x = 20,size_axis_text.y = 20,
                            size_title_text = 30,size_legend_text = 20,
                            size_lines_panel = 0.3,size_panel_border = 2,
                            x_hjust = 0.5, y_vjust = 0.5,font_family = "Arial",size_ticks = 2) { 
-  theme(axis.line = element_blank(),
+  theme(
         panel.background = element_rect(fill = 'white'),
         panel.grid.major.y = element_blank(),
         panel.grid.minor.y = element_blank(),
