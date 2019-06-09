@@ -13,7 +13,7 @@ theme_ohchibi <- function (size_axis_text.x = 20,size_axis_text.y = 20,
                            legend_proportion_size = 1,
                            size_title_text = 30,size_legend_text = 20,
                            size_lines_panel = 0.3,size_panel_border = 1,
-                           x_hjust = 0.5, y_vjust = 0.5,font_family = "Arial",size_ticks = 0) { 
+                           x_hjust = 0.5, y_vjust = 0.5,font_family = "Arial",size_ticks = NA) { 
   theme(
         panel.background = element_rect(fill = 'white'),
         panel.grid.major.y = element_blank(),
