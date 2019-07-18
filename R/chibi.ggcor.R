@@ -10,7 +10,7 @@
 
 chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearson",
                         display.values = TRUE,display.significance = TRUE,
-                        p.adjust.method = "holm",p.adj.thres = 0.1){
+                        p.adjust.method = "holm",p.adj.thres = 0.1,size_r_display = 6){
   mclust_ed <- as.dist(1-cor(Tab,method = cor.method)) %>% hclust(method = hclust_method) 
   order_r <- mclust_ed$order %>% mclust_ed$labels[.]
   res_rcorr <- Hmisc::rcorr(Tab_ed,type = cor.method)
@@ -46,7 +46,7 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
       axis.text.x = element_text(angle = 90,vjust = 0.5,hjust = 1)
     )
   if(display.values == TRUE){
-    p <- p + geom_text(aes(label = rbold),parse = TRUE,family = "Arial",size = 8) 
+    p <- p + geom_text(aes(label = rbold),parse = TRUE,family = "Arial",size = size_r_display) 
   }
   if(display.significance == TRUE){
     p <- p + geom_tile(aes(color = Significance),fill = '#00000000', size = 1,width = 0.85,height = 0.85) 
