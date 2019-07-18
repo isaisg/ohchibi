@@ -31,7 +31,9 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
   merged$Var1 <- merged$Var1 %>% factor(levels = order_r)
   merged$Var2 <- merged$Var2 %>% factor(levels = order_r)
   merged$Significance <- "NoSignificant"
-  merged$Significance[which(merged$p.adj < p.adj.thres)] <- "Significant"
+  merged$Significance[which(merged$p.adj < p.adj.thres)] <- "Significant" 
+  merged$r <- round(merged$r,2)
+  merged$r <- paste0(sprintf("bold("),merged$r,")")
   p <- ggplot(data = merged,aes(Var1,Var2)) +
     geom_raster(aes(fill = r)) + 
     scale_fill_paletteer_c(package = "pals",palette = "kovesi.diverging_bwr_55_98_c37") +
@@ -44,7 +46,7 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
       axis.text.x = element_text(angle = 90,vjust = 0.5,hjust = 1)
     )
   if(display.values == TRUE){
-    p <- p + geom_text(aes(label = round(r,2))) 
+    p <- p + geom_text(aes(label = r),parse = TRUE) 
   }
   if(display.significance == TRUE){
     p <- p + geom_tile(aes(color = Significance),fill = '#00000000', size = 1,width = 0.85,height = 0.85) 
