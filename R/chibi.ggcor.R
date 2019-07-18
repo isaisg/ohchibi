@@ -46,7 +46,7 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
       axis.text.x = element_text(angle = 90,vjust = 0.5,hjust = 1)
     )
   if(display.values == TRUE){
-    p <- p + geom_text(aes(label = rbold),parse = TRUE,family = "Arial",size = 2) 
+    p <- p + geom_text(aes(label = rbold),parse = TRUE,family = "Arial",size = 8) 
   }
   if(display.significance == TRUE){
     p <- p + geom_tile(aes(color = Significance),fill = '#00000000', size = 1,width = 0.85,height = 0.85) 
