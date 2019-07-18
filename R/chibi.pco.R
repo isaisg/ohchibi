@@ -14,7 +14,7 @@ chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",co
                     size_legend_text=20,size_title_text = 30,legend_proportion_size=2,
 		size_lines_panel = 0,size_panel_border = 1,font_family = "Arial"){
   Map_pco<-list_ohpco$Map_pco
-  myvar=list_ohpco$variance_exbolded
+  myvar=list_ohpco$variance_explained
   if(lines_zero == FALSE) {
     if(is.null(shape_val)){
       p <- ggplot(data = Map_pco,aes_string(x = comp_a,y = comp_b))+
@@ -30,8 +30,8 @@ chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",co
               panel.grid.minor = element_line(colour = "#D9D9D9", size = size_lines_panel),
               panel.border = element_rect(fill=NA,color =  "black",size = size_panel_border),
               axis.ticks = element_line(colour = "black",size = 2.5),
-              axis.text.x = element_text(family = font_family,face = "plain",size =size_axis_text,colour="black",hjust = x_hjust),
-              axis.text.y = element_text(family = font_family,face="plain",size=size_axis_text,colour="black",vjust = y_vjust),
+              axis.text.x = element_text(family = font_family,face = "bold",size =size_axis_text,colour="black",hjust = x_hjust),
+              axis.text.y = element_text(family = font_family,face="bold",size=size_axis_text,colour="black",vjust = y_vjust),
               axis.title.x = element_text(family = font_family,face="bold",size = size_axis_title,colour = "black"),
               axis.title.y = element_text(family = font_family,face="bold",size=size_axis_title,colour="black"),
               legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
