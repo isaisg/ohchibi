@@ -10,7 +10,7 @@
 
 chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearson",
                         display.values = TRUE,display.significance = TRUE,
-                        p.adjust.method = "holm",p.adj.thres = 0.1,size_r_display = 6){
+                        p.adjust.method = "holm",p.adj.thres = 0.1,size_r_display = 3){
   mclust_ed <- as.dist(1-cor(Tab,method = cor.method)) %>% hclust(method = hclust_method) 
   order_r <- mclust_ed$order %>% mclust_ed$labels[.]
   res_rcorr <- Hmisc::rcorr(Tab_ed,type = cor.method)
