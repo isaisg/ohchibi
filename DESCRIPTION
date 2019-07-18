@@ -11,10 +11,11 @@ Depends: R (>= 3.3.1),
 	 ape(>= 5.1),
 	 phytools(>= 0.6.44),
 	 ggforce(>= 0.1.3),
-	 Hmisc(> = 4.2.0)
+	 Hmisc(> = 4.2.0),
+	 harrietr(> 0.2.3)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: ggplot2, vegan, AMOR,magrittr,ape, phytools, ggforce, Hmisc
+Imports: ggplot2, vegan, AMOR,magrittr,ape, phytools, ggforce, Hmisc, harrietr
 Remotes: surh/AMOR@0.1-2
