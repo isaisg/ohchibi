@@ -18,7 +18,7 @@ chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",co
   if(lines_zero == FALSE) {
     if(is.null(shape_val)){
       p <- ggplot(data = Map_pco,aes_string(x = comp_a,y = comp_b))+
-        geom_point(size = size,alpha=alpha,pch=mypch,colour="black",stroke = stroke,aes(fill = col_val))+
+        geom_point(size = size,alpha=alpha,pch=mypch,colour="black",stroke = stroke,aes_string(fill = col_val))+
         geom_point(size = size/ratio_size_shape_background,colour = col_shape_background,alpha=alpha_shape_background)+
         #scale_fill_manual(values = mix.colors)+
         xlab(label = paste(comp_a,"(",myvar[which(names(myvar)==comp_a)],"%)",sep="")) +
@@ -76,7 +76,7 @@ chibi.pco<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a="PCo1",co
     p <- ggplot(data = Map_pco,aes_string(x = comp_a,y = comp_b))+
     geom_vline(xintercept = 0,size = size_axis_line,color = "#D9D9D9",linetype = type_axis_line) +
     geom_hline(yintercept = 0,size = size_axis_line,color = "#D9D9D9",linetype = type_axis_line) +
-      geom_point(size = size,alpha=alpha,pch=mypch,colour="black",stroke = stroke,aes(fill = col_val))+
+      geom_point(size = size,alpha=alpha,pch=mypch,colour="black",stroke = stroke,aes_string(fill = col_val))+
       geom_point(size = size/ratio_size_shape_background,colour = col_shape_background,alpha=alpha_shape_background)+
       #scale_fill_manual(values = mix.colors)+
       xlab(label = paste(comp_a,"(",myvar[which(names(myvar)==comp_a)],"%)",sep="")) +
