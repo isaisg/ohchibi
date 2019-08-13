@@ -9,10 +9,10 @@
 
 
 
-oh.read.gff <- function(file = NULL,withOGs = FALSE,skip = 1){
+oh.read.gff <- function(file = NULL,withOGs = FALSE,skip = 1,comment.char = ""){
   if(withOGs == TRUE){
     tfile <- read.table(file = file,header = F,
-          skip = skip,comment.char = "",quote = "",sep = "\t")
+          skip = skip,comment.char = comment.char,quote = "",sep = "\t")
   colnames(tfile) <-  c("seqid", "source", "type", "start", "end", 
                         "score", "strand", "phase", "attributes","orthogroup_id")
     gid <- NULL
