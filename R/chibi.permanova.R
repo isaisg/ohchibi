@@ -7,7 +7,7 @@
 #' chibi.permanova()
 
 chibi.permanova <- function(mypermanova = NULL,pval_thres = 0.05,legend_proportion_size =2,
-y_vjust=1,size_axis_text=20,size_axis_title=40,size_legend_text=20,size_title_text = 30,
+y_vjust=1,size_axis_text=20,size_axis_title=60,size_legend_text=20,size_title_text = 30,
 size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Arial",aspect.ratio =3,size_panel_border = 0.1,
 terms_exclude_plot = NULL){
   pval_thres <- pval_thres
@@ -45,16 +45,16 @@ terms_exclude_plot = NULL){
           panel.grid.minor = element_blank(),
           panel.border = element_rect(colour = "black", size = size_panel_border, fill = NA),
           axis.ticks.y =element_line(colour = "black", size = size_ticks_y),
-          axis.ticks.x =element_line(colour = "black", size = size_ticks_x),
+          axis.ticks.x =element_blank(),
           axis.text.x =element_blank(),
-          axis.text.y = element_text(family = font_family,face="plain",size=size_axis_text,colour="black",vjust = y_vjust),
+          axis.text.y = element_text(family = font_family,face="bold",size=size_axis_text,colour="black",vjust = y_vjust),
           axis.title.x = element_blank(),
-          axis.title.y = element_text(family = font_family,face="plain",size=size_axis_title,colour="black"),
+          axis.title.y = element_text(family = font_family,face="bold",size=size_axis_title,colour="black"),
           legend.background = element_blank(),legend.key.size = unit(legend_proportion_size,"line"),
           legend.title=element_text(size=size_title_text,
           family = font_family,face = "plain",colour = "black"),
           legend.key = element_blank(),
-          legend.text = element_text(size=size_legend_text,family = font_family,face = "plain",colour = "black"),
+          legend.text = element_text(size=size_legend_text,family = font_family,face = "bold",colour = "black"),
           legend.position ="right"
           )
   return(list(df = df_plot_original,p = p_var))
