@@ -68,7 +68,9 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
   if (!is.null(Map) & !is.null(facet_formula)) {
     mformula <- gsub(pattern = " ",replacement = "",x = facet_formula)
     facet_formula <- as.formula(paste("~", facet_formula))
-    p1 <- p1 + facet_grid(facet_formula, scales = scales, space = space)
+    p1 <- p1 + facet_grid(facet_formula, scales = scales, space = space) +
+     scale_y_continuous(breaks = seq(0,1,by =  0.1))
+
   }
   p1 <- p1 + guides(fill = guide_legend(nrow = nrow.legend))
   #Here evaluate if the mformula was passed at all
@@ -113,7 +115,9 @@ chibi.phylogram<-function (Tab = NULL, Map = NULL, facet_formula = NULL, colname
           strip.background = element_blank(),
           )
   if (!is.null(Map) & !is.null(facet_formula)) {
-    p2 <- p2 + facet_grid(facet_formula, scales = scales, space = space)
+    p2 <- p2 + facet_grid(facet_formula, scales = scales, space = space) + 
+	  scale_y_continuous(breaks = seq(0,1,by =  0.1))
+
   }
   toret=list(p_raw = p1, p_mean=p2)
   return(toret)
