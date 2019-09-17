@@ -418,8 +418,6 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
                 geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
-                           size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
               p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
@@ -449,7 +447,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               if(is.null(shape_val)){
 
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
-                                                    y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
+                                                    y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)+
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                           size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point) 
 
 
 
