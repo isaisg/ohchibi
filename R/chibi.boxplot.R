@@ -14,7 +14,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
                         alpha_point=0.5,stroke_point=0.5,size_boxplot=0.5,size_median=2,
                         size_axis_text.x=20,size_axis_text.y=20,size_axis_title.x=30,size_axis_title.y=30,
                         size_legend_text=20,size_title_text = 30,strip_text_size=20,legend_proportion_size=2,
-			size_lines_panel = 0.3,size_panel_border = 1,font_family = "Arial"){
+			size_lines_panel = 0.3,size_panel_border = 1,font_family = "Arial",dodge_width = 0.9,jitter_width = 0.05){
   Map <- as.data.frame(Map,stringsAsFactors = TRUE)
   if(is.null(mpalette)){
     mpalette <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C",
@@ -448,7 +448,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)+
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point) 
 
 
@@ -456,7 +456,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
 
@@ -603,7 +603,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
 
