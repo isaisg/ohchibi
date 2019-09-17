@@ -13,7 +13,7 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
                         p.adjust.method = "holm",p.adj.thres = 0.1,size_r_display = 4){
   mclust_ed <- as.dist(1-cor(Tab,method = cor.method)) %>% hclust(method = hclust_method) 
   order_r <- mclust_ed$order %>% mclust_ed$labels[.]
-  res_rcorr <- Hmisc::rcorr(Tab_ed,type = cor.method)
+  res_rcorr <- Hmisc::rcorr(Tab,type = cor.method)
   melted_r <- res_rcorr$r %>% melt_dist
   melted_p <- res_rcorr$P %>% melt_dist
   melted_p$p.adj <- melted_p$dist %>% p.adjust(method = p.adjust.method)
