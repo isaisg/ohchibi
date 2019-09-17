@@ -52,7 +52,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         ########################
         ########################
         p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
-          geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
+          geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot)
         p <- p + scale_fill_manual(values = mpalette)
         dat <- ggplot_build(p)$data[[1]]
         map_melted <- melt(table(Map[,which(colnames(Map)==x_val)],Map[,which(colnames(Map)==col_val)]))
@@ -75,8 +75,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         }
         p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                             y=middle, yend=middle),colour=dat$colour,size=size_median,inherit.aes = F)
-        p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
-                                                          jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+        p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width,
+                                                          jitter.width = jitter_width), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
 
 
       }else{
@@ -89,7 +89,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         if(col_val != x_val){
           if(lfacet == 1){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
@@ -117,13 +117,13 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
-                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width,
+                                                              jitter.width = jitter_width), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
 
 
           }else if (lfacet ==2){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
@@ -152,8 +152,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
-                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width,
+                                                              jitter.width = jitter_width), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
 
 
           }else{
@@ -169,7 +169,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           if(lfacet == 1){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             #Change this part when facette is equal two
@@ -199,14 +199,14 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
-                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width,
+                                                              jitter.width = jitter_width), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
 
 
 
           }else if (lfacet ==2){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val,fill = col_val)) +
-              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + scale_fill_manual(values = mpalette)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             #Change this part when facette is equal two
@@ -235,8 +235,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }
             p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                 y=middle, yend=middle),color = dat$colour,size=size_median,inherit.aes = F)
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9,
-                                                              jitter.width = 0.1), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge.width,
+                                                              jitter.width = jitter_width), size = size_point,shape = mypch_point,col="#414141",stroke=stroke_point,alpha=alpha_point,inherit.aes = T)
 
 
 
@@ -261,7 +261,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           #This is the black style with red medians. Great when there are a lot of points such as RNA-Seq
           p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-            geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
+            geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = dodge_width), size=size_boxplot)
           dat <- ggplot_build(p)$data[[1]]
           p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                               y=middle, yend=middle), colour=median_color, size=size_median)
@@ -271,7 +271,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
 
           }else{
-            p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+            p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                               size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
 
           }
@@ -285,7 +285,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           if(lfacet == 1){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
             red_formula <- as.formula(paste(red_formula,"~",as.character(x_val),sep = " "))
@@ -314,14 +314,14 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             }else{
 
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
 
             }
           }else if (lfacet ==2){
             #Open style no color when facetting equal to 2
             p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = 0.9), size=size_boxplot)
+              geom_boxplot(color=color_boxplot,outlier.colour = NA,position = position_dodge(width = dodge_width), size=size_boxplot)
             p <- p + facet_grid(facets = facet_formula,scales = "free",space = "free")
             red_formula <- grep(pattern = "~",x = as.character(facet_formula),invert = T,value = T)
             red_formula <- as.formula(paste(red_formula,"~",as.character(x_val),sep = " "))
@@ -350,7 +350,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             }else{
 
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,shape=shape_val),color="#414141",inherit.aes = F)
 
             }
@@ -372,8 +372,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
         if(col_val != x_val){
           if(is.null(facet_formula)){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) +
-              geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
+              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)+
               scale_color_manual(values = mpalette)+ scale_fill_manual(values = mpalette)
             dat <- ggplot_build(p)$data[[1]]
@@ -402,7 +402,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }else{
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
             }
 
@@ -416,7 +416,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             if(lfacet == 1){
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
                 scale_fill_manual(values = mpalette)
 
@@ -462,9 +462,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             }else if (lfacet ==2){
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -501,7 +501,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
             }else{
@@ -519,8 +519,8 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
           ########################
           if(is.null(facet_formula)){
             p <- ggplot(Map, aes_string(x = x_val, y = y_val, col = col_val,  fill = col_val)) +
-              geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
-              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              geom_boxplot(fill = NA, outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
+              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)+
               scale_color_manual(values = mpalette)+ scale_fill_manual(values = mpalette)
             dat <- ggplot_build(p)$data[[1]]
@@ -549,7 +549,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }else{
               p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                   y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-              p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                 size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
             }
 
@@ -563,9 +563,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             if(lfacet == 1){
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -609,9 +609,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
 
             }else if (lfacet ==2){
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = mpalette)+
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -648,7 +648,7 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
               }else{
                 p <- p + geom_segment(data=dat, aes(x=xmin, xend=xmax,
                                                     y=middle, yend=middle), colour=dat$colour, size=size_median,inherit.aes = F)
-                p<-p + geom_point(position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                p<-p + geom_point(position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                                   size = size_point,stroke=stroke_point,alpha=alpha_point,aes_string(x=x_val,y=y_val,col=col_val,shape=shape_val),inherit.aes = F)
               }
             }else{
@@ -674,9 +674,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             myrep <- length(unique(Map[,which(colnames(Map)==x_val)]))
             p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-              geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+              geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
               scale_color_manual(values = rep("#414141",myrep)) +
-              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
               scale_fill_manual(values = mpalette)
 
@@ -711,9 +711,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             ########################
             myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
             p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-              geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+              geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
               scale_color_manual(values = rep("#414141",myrep)) +
-              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+              geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                          size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
               scale_fill_manual(values = mpalette)
 
@@ -750,9 +750,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             if(lfacet == 1){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) +
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -786,9 +786,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }else if (lfacet ==2){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) +
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -834,9 +834,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             if(lfacet == 1){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) +
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
@@ -870,9 +870,9 @@ chibi.boxplot<-function(Map=Map,x_val=NULL,y_val=NULL,col_val=NULL,shape_val=NUL
             }else if (lfacet ==2){
               myrep <- length(unique(Map[,which(colnames(Map)==col_val)]))
               p <- ggplot(Map, aes_string(x = x_val, y = y_val)) +
-                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = 0.9), size=size_boxplot) +
+                geom_boxplot(aes_string(color=col_val),outlier.colour = NA, position = position_dodge(width = dodge_width), size=size_boxplot) +
                 scale_color_manual(values = rep("#414141",myrep)) +
-                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = 0.9, jitter.width = 0.1),
+                geom_point(aes_string(fill=col_val),position = position_jitterdodge(dodge.width = dodge_width, jitter.width = jitter_width),
                            size = size_point, shape = mypch_point, col = color_boxplot,stroke=stroke_point,alpha=alpha_point)  +
                 scale_fill_manual(values = mpalette)
 
