@@ -5,9 +5,9 @@
 \title{Plots results from oh.cap}
 \usage{
 chibi.cap(list_ohpco = NULL, col_val = NULL, shape_val = NULL,
-  comp_a = NULL, comp_b = NULL, mypch = 21, size = 25,
-  alpha = 0.7, stroke = 1.5, col_shape_background = "white",
-  alpha_shape_background = 0, lines_zero = FALSE,
+  comp_a = NULL, comp_b = NULL, mypch = 21, size = 25, alpha = 1,
+  stroke = 1.5, col_shape_background = "white",
+  alpha_shape_background = 0, lines_zero = TRUE,
   size_axis_line = 0.5, type_axis_line = "longdash",
   ratio_size_shape_background = 1.3, y_vjust = 0.5, x_hjust = 0.5,
   size_axis_text = 20, size_axis_title = 30, size_legend_text = 20,

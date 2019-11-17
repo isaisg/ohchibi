@@ -7,7 +7,7 @@
 chibi.ggcor(Tab = NULL, hclust_method = "ward.D",
   cor.method = "pearson", display.values = TRUE,
   display.significance = TRUE, p.adjust.method = "holm",
-  p.adj.thres = 0.1)
+  p.adj.thres = 0.1, size_r_display = 4)
 }
 \description{
 Automatically clusters, calculate p.values, adjust p.values and plots
