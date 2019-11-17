@@ -14,11 +14,12 @@ Depends: R (>= 3.3.1),
 	 Hmisc(>= 4.2.0),
 	 harrietr(>= 0.2.3),
 	 paletteer,
+	 egg(>= 0.4.5)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Imports: ggplot2, vegan, AMOR,magrittr,ape, phytools, ggforce, Hmisc, harrietr, paletteer,
+Imports: ggplot2, vegan, AMOR,magrittr,ape, phytools, ggforce, Hmisc, harrietr, paletteer, egg
 Remotes: surh/AMOR@0.1-2, EmilHvitfeldt/paletteer
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr

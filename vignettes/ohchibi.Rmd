@@ -46,20 +46,40 @@ mpco <- oh.pco(Tab = Dat$Tab %>% t, Map = Dat$Map,
        distfun = distfun,id_var = "ID_Matrix")
 
 #Plot the results using chibi.pco
-chibi.pco(list_ohpco = mpco,
+p_pco <- chibi.pco(list_ohpco = mpco,
           col_val = "Fraction",size = 8,alpha = 1,size_panel_border = 2)
+
+p_pco
+```
+
+####Permutational multivariate analysis of variance (PERMANOVA)
+```{r,fig.width = 6,fig.height = 9,fig.show = "hold"}
+
+#Use vegan adonis function to compute permanova
+Tab_bray <- distfun(t(Dat$Tab))
+mypermanova <- adonis(Tab_bray ~  Fraction + Phosphate,
+                      data = Dat$Map,strata = Dat$Map$Rep,
+                      permutations = 999)
+
+mypermanova
+
+
+#Plot the results using chibi.permanova
+p_perm <- chibi.permanova(mypermanova = mypermanova)
+p_perm$p 
 ```
 
 
 ####Constrained analysis of principal coordinates (CAP)
-```{r,fig.width = 8,fig.height = 6,fig.show = "hold"}
+```{r,fig.width = 9.5,fig.height = 6,fig.show = "hold"}
 
 #Run the oh.cap function
-mcap <- oh.cap(Tab = Dat$Tab, Map = Dat$Map,
-                  formula = "Fraction + Phosphate + Condition(Rep)",
+Dat_sub <- Dat %>% subset.Dataset(Fraction == "Root",drop = T,clean = T)
+mcap <- oh.cap(Tab = Dat_sub$Tab, Map = Dat_sub$Map,
+                  formula = "Phosphate + Condition(Rep)",
                   distfun = distfun,perms = 9999)
 
 #Plot the results using chibi.cap
 chibi.cap(list_ohpco = mcap,comp_a = "CAP1",comp_b = "CAP2",
-          col_val = "Fraction",size = 8,alpha = 1,size_panel_border = 2)
+          col_val = "Phosphate",size = 8,alpha = 1,size_panel_border = 2)
 ```
