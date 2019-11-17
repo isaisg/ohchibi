@@ -6,7 +6,7 @@
 #' @examples
 #' oh.pca()
 
-oh.pca<-function(Tab=Tab,Map=Map,distfun=distfun,retx = TRUE,center = FALSE,scale = FALSE,id_var="Sample_Id"){
+oh.pca<-function(Tab=Tab,Map=Map,retx = TRUE,center = FALSE,scale = FALSE,id_var="Sample_Id"){
   mpca <- prcomp(x = Tab,retx = retx ,center = center,scale. = scale)
   scores <- mpca$x %>% as.data.frame
   df_var <- (summary(mpca) %$% importance %>% as.data.frame)[2,]
@@ -16,7 +16,8 @@ oh.pca<-function(Tab=Tab,Map=Map,distfun=distfun,retx = TRUE,center = FALSE,scal
   scores <- merge(scores,Map,by = id_var)
   toret <- list(
     Map_pca = scores,
-    variance_explained = df_var
+    variance_explained = df_var,
+    prcomp = mpca
   )  
   return(toret)
 }
