@@ -26,7 +26,7 @@ The functions **chibi**   take the structure output by its corresponding **oh** 
 
 ### Installation
 You can install the ohchibi package using the devtools library<br/><br/>
-**devtools::install_github("isaisg/ohchibi")**
+**devtools::install_github("isaisg/ohchibi",build_vignettes = TRUE))**
 
 ### Example dataset
 We will utilize the syncom dataset to show the usage of the main functions in this package. 
@@ -131,3 +131,4 @@ res$p_raw + theme(legend.position = "none",
 res$p_mean + theme(legend.position = "none",
                    strip.text.x = element_text(angle = 90,size = 5,vjust = 0.5,hjust = 1))
 ```
+
