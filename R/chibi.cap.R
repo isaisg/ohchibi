@@ -8,10 +8,11 @@
 
 
 chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp_b=NULL,mypch=21,
-        size=25,alpha=0.7,stroke=1.5,col_shape_background="white",alpha_shape_background=0,
-        lines_zero = FALSE,size_axis_line = 0.5,type_axis_line = "longdash",
+        size=25,alpha=1,stroke=1.5,col_shape_background="white",alpha_shape_background=0,
+        lines_zero = TRUE,size_axis_line = 0.5,type_axis_line = "longdash",
         ratio_size_shape_background=1.3,y_vjust=0.5,x_hjust=0.5,size_axis_text=20,size_axis_title=30,
         size_legend_text=20,size_title_text = 30,legend_proportion_size=2,size_lines_panel = 0,size_panel_border = 1,font_family = "Arial"){
+  mix.colors <- c("#A6CEE3","#1F78B4","#B2DF8A","#33A02C","#FB9A99","#E31A1C","#FDBF6F","#FF7F00","#CAB2D6","#6A3D9A","#FFFF99","#B15928")
   percvar<-list_ohpco$variance_explained_axis
   Map_cap<-list_ohpco$Map_cap
   vartot<-list_ohpco$total_var
@@ -41,6 +42,7 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
             legend.text = element_text(size=size_legend_text,
                                        family = font_family,face = "bold",colour = "black"),
             legend.position ="right")
+    p <- p + scale_fill_manual(values = mix.colors)
     #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
     return(p)
     }else{
@@ -68,6 +70,7 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
                                          family = font_family,face = "bold",colour = "black"),
               legend.position ="right")
       #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
+      p <- p + scale_color_manual(values = mix.colors)
       return(p)
     }
 	}else{
@@ -97,6 +100,8 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
           legend.text = element_text(size=size_legend_text,
                                      family = font_family,face = "bold",colour = "black"),
           legend.position ="right")
+  p <- p + scale_fill_manual(values = mix.colors)
+
   #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
   return(p)
   }else{
@@ -125,6 +130,8 @@ chibi.cap<-function(list_ohpco=NULL,col_val=NULL,shape_val=NULL,comp_a=NULL,comp
             legend.text = element_text(size=size_legend_text,
                                        family = font_family,face = "bold",colour = "black"),
             legend.position ="right")
+    p <- p + scale_color_manual(values = mix.colors)
+
     #p<-p + guides(fill=guide_legend(keywidth=0.5,keyheight=0.5,default.unit="inch",override.aes = list(size=10,stroke=stroke,shape=mypch,alpha=alpha)))
     return(p)
   }

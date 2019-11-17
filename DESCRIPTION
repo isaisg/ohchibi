@@ -20,3 +20,5 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports: ggplot2, vegan, AMOR,magrittr,ape, phytools, ggforce, Hmisc, harrietr, paletteer,
 Remotes: surh/AMOR@0.1-2, EmilHvitfeldt/paletteer
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
