@@ -29,7 +29,7 @@ You can install the ohchibi package using the devtools library<br/><br/>
 **devtools::install_github("isaisg/ohchibi")**
 
 ### Example dataset
-We will utilize the syncom dataset to show the usage of the main fucntions in thois package. 
+We will utilize the syncom dataset to show the usage of the main fucntions in this package. 
 ```{r}
 data(syncom)
 Dat
@@ -47,7 +47,7 @@ mpco <- oh.pco(Tab = Dat$Tab %>% t, Map = Dat$Map,
 
 #Plot the results using chibi.pco
 chibi.pco(list_ohpco = mpco,
-          col_val = "Tissue",size = 8,alpha = 1,size_panel_border = 2)
+          col_val = "Fraction",size = 8,alpha = 1,size_panel_border = 2)
 ```
 
 
@@ -56,10 +56,10 @@ chibi.pco(list_ohpco = mpco,
 
 #Run the oh.cap function
 mcap <- oh.cap(Tab = Dat$Tab, Map = Dat$Map,
-                  formula = "Tissue + condition + Condition(Rep)",
+                  formula = "Fraction + Phosphate + Condition(Rep)",
                   distfun = distfun,perms = 9999)
 
 #Plot the results using chibi.cap
 chibi.cap(list_ohpco = mcap,comp_a = "CAP1",comp_b = "CAP2",
-          col_val = "Tissue",size = 8,alpha = 1,size_panel_border = 2)
+          col_val = "Fraction",size = 8,alpha = 1,size_panel_border = 2)
 ```
