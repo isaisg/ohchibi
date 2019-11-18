@@ -52,6 +52,8 @@ oh.read.gff <- function(file = NULL,withOGs = FALSE,skip = 1,comment.char = ""){
                                 replacement ="\\2",tfile$attributes[i]))
       }
     }
+    tfile$gene_oid <- tfile$gene_oid %>%  gsub(pattern = "\\;.*",replacement = "") %>%
+  gsub(pattern = "ID=",replacement = "")
     tfile$gene_oid <- factor(gid)
     tfile$locus_tag <- factor(glocus)
     return(tfile)
