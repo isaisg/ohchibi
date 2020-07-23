@@ -8,7 +8,7 @@
 
 
 
-chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearson",
+chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D2",cor.method = "pearson",
                         display.values = TRUE,display.significance = TRUE,
                         p.adjust.method = "holm",p.adj.thres = 0.1,size_r_display = 4){
   mclust_ed <- as.dist(1-cor(Tab,method = cor.method)) %>% hclust(method = hclust_method) 
@@ -36,7 +36,7 @@ chibi.ggcor <- function(Tab = NULL,hclust_method = "ward.D",cor.method = "pearso
   merged$rbold <- paste0(sprintf("bold("),merged$rbold,")")
   p <- ggplot(data = merged,aes(Var1,Var2)) +
     geom_raster(aes(fill = r)) + 
-    scale_fill_paletteer_c(package = "pals",palette = "kovesi.diverging_bwr_55_98_c37",limits = c(-1,1)) +
+    scale_fill_paletteer_c("pals::kovesi.diverging_bwr_55_98_c37",limits = c(-1,1)) +
     scale_color_manual(values = c("#00000000","black"))+
     theme_ohchibi(legend_proportion_size = NA,size_panel_border = 2) +
     theme(
