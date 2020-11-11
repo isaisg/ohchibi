@@ -4,17 +4,39 @@
 \alias{chibi.sina}
 \title{Creates a sina plot ussing ggplot2 using variables in a metadata (Map) structure}
 \usage{
-chibi.sina(Map = Map, x_val = NULL, y_val = NULL, col_val = NULL,
-  mpalette = NULL, facet_formula = NULL, df_stats = NULL,
-  mean_var = NULL, ymin_var = NULL, ymax_var = NULL,
-  show_points = TRUE, color_points = FALSE, color_bar = TRUE,
-  bar_color = "#414141", points_color = "#414141", size_point = 10,
-  alpha_point = 0.3, stroke_point = 0.5, size_bar = 2,
-  width_bar = 0.2, size_axis_text.x = 20, size_axis_text.y = 20,
-  size_axis_title.x = 30, size_axis_title.y = 30,
-  size_legend_text = 20, size_title_text = 30, strip_text_size = 20,
-  legend_proportion_size = 2, size_lines_panel = 0.3,
-  size_panel_border = 1, font_family = "Arial")
+chibi.sina(
+  Map = Map,
+  x_val = NULL,
+  y_val = NULL,
+  col_val = NULL,
+  mpalette = NULL,
+  facet_formula = NULL,
+  df_stats = NULL,
+  mean_var = NULL,
+  ymin_var = NULL,
+  ymax_var = NULL,
+  show_points = TRUE,
+  color_points = FALSE,
+  color_bar = TRUE,
+  bar_color = "#414141",
+  points_color = "#414141",
+  size_point = 10,
+  alpha_point = 0.3,
+  stroke_point = 0.5,
+  size_bar = 2,
+  width_bar = 0.2,
+  size_axis_text.x = 20,
+  size_axis_text.y = 20,
+  size_axis_title.x = 30,
+  size_axis_title.y = 30,
+  size_legend_text = 20,
+  size_title_text = 30,
+  strip_text_size = 20,
+  legend_proportion_size = 2,
+  size_lines_panel = 0.3,
+  size_panel_border = 1,
+  font_family = "Arial"
+)
 }
 \description{
 The sina plot  can represent up to two variables in a single plot

@@ -4,12 +4,22 @@
 \alias{chibi.permanova}
 \title{Plots results from adonis output}
 \usage{
-chibi.permanova(mypermanova = NULL, pval_thres = 0.05,
-  legend_proportion_size = 2, y_vjust = 1, size_axis_text = 20,
-  size_axis_title = 30, size_legend_text = 20, size_title_text = 30,
-  size_ticks_x = 2.5, size_ticks_y = 2.5, font_family = "Arial",
-  aspect.ratio = 3, size_panel_border = 0.1,
-  terms_exclude_plot = NULL)
+chibi.permanova(
+  mypermanova = NULL,
+  pval_thres = 0.05,
+  legend_proportion_size = 2,
+  y_vjust = 1,
+  size_axis_text = 20,
+  size_axis_title = 30,
+  size_legend_text = 20,
+  size_title_text = 30,
+  size_ticks_x = 2.5,
+  size_ticks_y = 2.5,
+  font_family = "Arial",
+  aspect.ratio = 3,
+  size_panel_border = 0.1,
+  terms_exclude_plot = NULL
+)
 }
 \description{
 Uses the aov table contained in out by adonis

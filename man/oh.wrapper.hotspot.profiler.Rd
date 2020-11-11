@@ -6,8 +6,7 @@
 two structures. One is a modified gff with the hotspots localized and another, a df summarizing the
 characteristics of the hotspots identified.}
 \usage{
-oh.wrapper.hotspot.profiler(df_gff = NULL, df_profiler = NULL,
-  threshold = 10)
+oh.wrapper.hotspot.profiler(df_gff = NULL, df_profiler = NULL, threshold = 10)
 }
 \description{
 Wrapper that takes a gff dataframe, a dataframe with gene_ids and hmm ids (oh.profiler.pl output)and returns

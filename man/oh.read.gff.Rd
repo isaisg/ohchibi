@@ -5,8 +5,7 @@
 \title{Read a gff3 file (IMG Data)  and converts into df 
 Aditionally extracts the gene_id and locus_tag and place them into a new column}
 \usage{
-oh.read.gff(file = NULL, withOGs = FALSE, skip = 1,
-  comment.char = "")
+oh.read.gff(file = NULL, withOGs = FALSE, skip = 1, comment.char = "")
 }
 \description{
 Read a gff3 file (IMG Data)  and converts into df 

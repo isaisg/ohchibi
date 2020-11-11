@@ -4,8 +4,15 @@
 \alias{oh.ggsave.svg}
 \title{Saves a ggplot object in a publication ready high resolution formar}
 \usage{
-oh.ggsave.svg(ggobject = p, outname = "", outdir = "figures/",
-  width = 20, height = 15, device = "svg", dpi = 600)
+oh.ggsave.svg(
+  ggobject = p,
+  outname = "",
+  outdir = "figures/",
+  width = 20,
+  height = 15,
+  device = "svg",
+  dpi = 600
+)
 }
 \description{
 Saves a ggplot object in a publication ready high resolution formar

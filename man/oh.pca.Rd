@@ -4,8 +4,14 @@
 \alias{oh.pca}
 \title{Performs Principal Component Analysis based on prcomp command}
 \usage{
-oh.pca(Tab = Tab, Map = Map, distfun = distfun, retx = TRUE,
-  center = FALSE, scale = FALSE, id_var = "Sample_Id")
+oh.pca(
+  Tab = Tab,
+  Map = Map,
+  retx = TRUE,
+  center = FALSE,
+  scale = FALSE,
+  id_var = "Sample_Id"
+)
 }
 \description{
 Two fundamental structures needed. The abundance matrix (Tab) and metadata (Map)

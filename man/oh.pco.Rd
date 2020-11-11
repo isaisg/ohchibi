@@ -4,8 +4,14 @@
 \alias{oh.pco}
 \title{Performs Principal Coordinate Analysis based on cmdscale command}
 \usage{
-oh.pco(Tab = Tab, Map = Map, ndim = 3, eig = T,
-  distfun = distfun, id_var = "Id")
+oh.pco(
+  Tab = Tab,
+  Map = Map,
+  ndim = 3,
+  eig = T,
+  distfun = distfun,
+  id_var = "Id"
+)
 }
 \description{
 Two fundamental structures needed. The abundance matrix (Tab) and metadata (Map)

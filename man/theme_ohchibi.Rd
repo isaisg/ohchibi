@@ -4,12 +4,23 @@
 \alias{theme_ohchibi}
 \title{ggplo2 theme default for ohchibi plots}
 \usage{
-theme_ohchibi(size_axis_text.x = 20, size_axis_text.y = 20,
-  size_axis_title.x = 30, size_axis_title.y = 30, angle_text.x = 0,
-  angle_text.y = 0, legend_proportion_size = 1, size_title_text = 30,
-  size_legend_text = 20, size_lines_panel = 0.3,
-  size_panel_border = 1, x_hjust = 0.5, y_vjust = 0.5,
-  font_family = "Arial", size_ticks = 1.5)
+theme_ohchibi(
+  size_axis_text.x = 20,
+  size_axis_text.y = 20,
+  size_axis_title.x = 30,
+  size_axis_title.y = 30,
+  angle_text.x = 0,
+  angle_text.y = 0,
+  legend_proportion_size = 1,
+  size_title_text = 30,
+  size_legend_text = 20,
+  size_lines_panel = 0.3,
+  size_panel_border = 1,
+  x_hjust = 0.5,
+  y_vjust = 0.5,
+  font_family = "Arial",
+  size_ticks = 1.5
+)
 }
 \description{
 Generalized theme for ggplot2. As universal as possible
