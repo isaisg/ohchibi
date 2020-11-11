@@ -158,6 +158,8 @@ chibi.heatmap <- function(Tab = NULL,dist_method_rows = "pearson",dist_method_co
   mres <- list(
     mclust_rows = mclust_rows,
     mclust_cols = mclust_cols,
+    df_clust_rows = df_clust_rows,
+    df_clust_cols = df_clust_cols,
     melted = melted_sub,
     heatmap = composition,
     p_dist = p_distri,
