@@ -156,12 +156,12 @@ chibi.heatmap <- function(Tab = NULL,dist_method_rows = "pearson",dist_method_co
                                 widths = egg_widths,padding = unit(20,"line"),draw = F)
   #Create list to return
   mres <- list(
+    heatmap = composition,
     mclust_rows = mclust_rows,
     mclust_cols = mclust_cols,
     df_clust_rows = df_clust_rows,
     df_clust_cols = df_clust_cols,
     melted = melted_sub,
-    heatmap = composition,
     p_dist = p_distri,
     p_heatmap = p_heatmap,
     p_tree_rows = p_tree_rows,
