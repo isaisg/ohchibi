@@ -16,7 +16,7 @@ chibi.heatmap <- function(Tab = NULL,df_border = NULL,dist_method_rows = "pearso
                           size_dendrogram = 0.3,panel_border_heatmap = 0.3,panel_spacing = 0,
                           font_family = "Helvetica",font_face = "plain",legend_position = "right",
                           tree_scale_factor_cols = c(0.005,0.005),tree_scale_factor_rows = c(0.001,0.001),
-                          egg_heights = c(0.5,1),egg_widths = c(0.2,1),mtheme = NULL){
+                          egg_heights = c(0.2,1),egg_widths = c(0.2,1),mtheme = NULL){
   if(dist_method_rows == "pearson" | dist_method_rows == "spearman"){
     dist_rows <- as.dist(1-cor(Tab %>% t,method = dist_method_rows))
     
