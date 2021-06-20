@@ -15,6 +15,10 @@ theme_ohchibi <- function (size_axis_text.x = 12,size_axis_text.y = 12,
                            size_lines_panel = 0.3,size_panel_border = 1,
                            x_hjust = 0.5, y_vjust = 0.5,font_family = "Helvetica",font_face = "plain",size_ticks = 0.5) { 
   theme(
+   	strip.background.x = element_blank(),
+    	strip.background.y = element_blank(),
+    	strip.text.x = element_text(size = size_axis_title.x),
+    	strip.text.y = element_text(size = size_axis_title.y),
         panel.background = element_rect(fill = 'white'),
 	panel.grid.major.x = element_line(color = "grey89",size = 0.25),
 	panel.grid.major.y = element_line(color = "grey89",size = 0.25),
