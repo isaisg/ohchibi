@@ -38,6 +38,7 @@ theme_ohchibi <- function (size_axis_text.x = 12,size_axis_text.y = 12,
         legend.text = element_text(size=size_legend_text,
           family = font_family,face = font_face,colour = "black"),
         legend.position ="right",
+	plot.title = element_text(hjust = 0.5,size = size_axis_title.x)
         )
 }
 
