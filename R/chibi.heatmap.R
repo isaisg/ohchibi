@@ -5,9 +5,12 @@
 #' @export
 #' @examples
 #' chibi.heatmap()
-chibi.heatmap <- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,dist_method_rows = "pearson",dist_method_cols = "euclidean",
+chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
+                          dist_method_rows = "pearson",dist_method_cols = "euclidean",
                           hclust_method_rows = "ward.D",hclust_method_cols = "ward.D",
-                          k_rows = 8,k_cols = 4,palette_heatmap = "pals::kovesi.diverging_bwr_55_98_c37",
+                          k_rows = 8,k_cols = 4,geom_text = FALSE,
+                          size_geom_text = 3,round_geom_text = 1,
+                          palette_heatmap = "pals::kovesi.diverging_bwr_55_98_c37",
                           palette_df_tile_col = paletteer_d("ggthemes::Tableau_20"),
                           range_fill_heatmap = 1,size_strip_text_row = 10,size_strip_text_col = 0,
                           size_axis_text_col = 10,size_axis_text_row = 0,axis_ticks_row = F,
@@ -111,6 +114,9 @@ chibi.heatmap <- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,dist_me
       scale_color_manual(values = palette_border,na.value = "#00000000")
   }
   
+  if(geom_text != FALSE){
+    p <- p + geom_text(aes(label = round(value,round_geom_text)),size = size_geom_text)
+  }
   
   if(axis_ticks_row == FALSE){
     p_heatmap <-  p +     theme(
