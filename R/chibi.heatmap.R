@@ -16,7 +16,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
                           size_axis_text_col = 10,size_axis_text_row = 0,axis_ticks_row = F,
                           size_legend_text = 10, size_legend_title = 11,
                           size_border_tile = 0.5, width_border_tile = 0.85,height_border_tile = 0.85,
-                          palette_border = c("black"),
+                          palette_border = c("black"),legend_proportion_size = 0.5,
                           size_dendrogram = 0.3,panel_border_heatmap = 0.3,panel_spacing = 0,
                           font_family = "Helvetica",font_face = "plain",legend_position = "right",
                           tree_scale_factor_cols = c(0.005,0.005),tree_scale_factor_rows = c(0.001,0.001),
@@ -134,8 +134,8 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
       panel.spacing.x  = unit(panel_spacing, "lines"),
       legend.position = legend_position,
       legend.text = element_text(family = font_family,face = font_face,size = size_legend_text),
-      legend.title = element_text(family = font_family,face = font_face,size = size_legend_title)
-      
+      legend.title = element_text(family = font_family,face = font_face,size = size_legend_title),
+      legend.key.size = unit(legend_proportion_size,"line")      
     )
   }else{
     p_heatmap <-  p +     theme(
@@ -152,7 +152,8 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
       panel.spacing.x  = unit(panel_spacing, "lines"),
       legend.position = legend_position ,
       legend.text = element_text(family = font_family,face = font_face,size = size_legend_text),
-      legend.title = element_text(family = font_family,face = font_face,size = size_legend_title)
+      legend.title = element_text(family = font_family,face = font_face,size = size_legend_title),
+      legend.key.size = unit(legend_proportion_size,"line")
       
       
     )
