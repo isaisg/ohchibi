@@ -203,7 +203,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
     
     #Verify the number of height values passed
     if (length(egg_heights) < 3){
-      egg_heights <- c(egg_heights[1],0.035,egg_heights[2])
+      egg_heights <- c(egg_heights[1],0.025,egg_heights[2])
     }
 
     ###### Arrange figures ##########
