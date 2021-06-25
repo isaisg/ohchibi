@@ -10,6 +10,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
                           hclust_method_rows = "ward.D",hclust_method_cols = "ward.D",
                           k_rows = 8,k_cols = 4,geom_text = FALSE,
                           size_geom_text = 3,round_geom_text = 1,
+			  color_raster = "#00000000",
                           palette_heatmap = "pals::kovesi.diverging_bwr_55_98_c37",
                           palette_df_tile_col = paletteer_d("ggthemes::Tableau_20"),
                           range_fill_heatmap = 1,size_strip_text_row = 9,size_strip_text_col = 0,
@@ -89,7 +90,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
   
   if(is.null(df_border)){
     p <- ggplot(data = melted_sub,mapping = aes(IdCols,IdRows)) +
-      geom_raster(aes(fill = value),color = "#00000000") +
+      geom_raster(aes(fill = value),color = color_raster) +
       facet_grid(ClusterRows~ClusterCols,scales = "free",space = "free") +
       theme_ohchibi(font_family = font_family
       ) +
