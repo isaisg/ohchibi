@@ -12,7 +12,7 @@ theme_ohchibi <- function (size_axis_text.x = 12,size_axis_text.y = 12,
                            angle_text.x = 0,angle_text.y = 0,
                            legend_proportion_size = 1,
                            size_title_text = 13,size_legend_text = 12,
-                           size_lines_panel = 0.3,size_panel_border = 1,
+                           size_lines_panel = 0.3,size_panel_border = 0.75,
                            x_hjust = 0.5, y_vjust = 0.5,font_family = "Helvetica",font_face = "plain",size_ticks = 0.5) { 
   theme(
    	strip.background.x = element_blank(),
