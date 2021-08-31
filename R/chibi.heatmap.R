@@ -183,6 +183,8 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
     #Create structure for col bar
     df_clust_cols <- merge(df_clust_cols,df_tile_col,by = "IdCols")
     colnames(df_clust_cols)[ncol(df_clust_cols)] <- "Color"
+    #Adjust levels
+    df_clust_cols$IdCols <- df_clust_cols$IdCols %>% factor(levels = order_cols)
     
     p_col_tile <- ggplot(df_clust_cols,aes(IdCols,"1")) +
       geom_raster(aes(fill = Color)) +
