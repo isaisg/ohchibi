@@ -8,7 +8,7 @@
 
 chibi.anova <- function(myanova = NULL,pval_thres = 0.05,legend_proportion_size =2,
 y_vjust=1,size_axis_text=20,size_axis_title=30,size_legend_text=20,size_title_text = 30,
-size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Helvetica",aspect.ratio =3,size_panel_border = 0.1){
+size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Helvetica",aspect.ratio =3,size_panel_border = 0.1,terms_exclude_plot = NULL){
   pval_thres <- pval_thres
   df_aov <- myanova %>% anova %>% as.data.frame
   afss <- df_aov$"Sum Sq"
@@ -27,6 +27,10 @@ size_ticks_x = 2.5, size_ticks_y =2.5, font_family = "Helvetica",aspect.ratio =3
     rbind(df_plot,.)
   df_plot$Term <- factor(df_plot$Term,levels = c("Residual",ord_ele))
   rownames(df_plot) <- NULL
+  if(! is.null(terms_exclude_plot)){
+	df_plot <- which(!(df_plot$Term %in% terms_exclude_plot)) %>%
+	 df_plot[.,] %>% droplevels
+  }
 
   p_var <- ggplot(data = df_plot, aes(x = Description,y = VarExp, fill = Term)) +
     geom_bar(stat = "identity") + ylab(label = "Variance Explained (%)") +
