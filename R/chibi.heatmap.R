@@ -185,7 +185,8 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
     colnames(df_clust_cols)[ncol(df_clust_cols)] <- "Color"
     #Need to readjust the order of the clusters of columns
     df_clust_cols$ClusterCols <- df_clust_cols$ClusterCols %>% factor(levels = order_groups_cols)
-    
+    df_clust_cols$IdCols <- df_clust_cols$IdCols %>% factor(levels = order_cols)    
+
     p_col_tile <- ggplot(df_clust_cols,aes(IdCols,"1")) +
       geom_raster(aes(fill = Color)) +
       theme_ohchibi() +
