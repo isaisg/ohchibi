@@ -13,7 +13,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
 			  color_tile = "#00000000",
                           palette_heatmap = "pals::kovesi.diverging_bwr_55_98_c37",
                           palette_df_tile_col = paletteer_d("ggthemes::Tableau_20"),
-                          range_fill_heatmap = 1,size_strip_text_row = 9,size_strip_text_col = 0,
+                          range_fill_heatmap = c(-1,1),size_strip_text_row = 9,size_strip_text_col = 0,
                           size_axis_text_col = 10,size_axis_text_row = 0,axis_ticks_row = F,
                           size_legend_text = 10, size_legend_title = 11,
                           size_border_tile = 0.5, width_border_tile = 0.85,height_border_tile = 0.85,
@@ -97,7 +97,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
       scale_x_discrete(expand = c(0,0)) +
       scale_y_discrete(expand =c(0,0)) +
       scale_fill_paletteer_c(palette_heatmap,
-                             limits = c(-range_fill_heatmap,range_fill_heatmap),oob = squish,name = "z-score")
+                             limits = range_fill_heatmap,oob = squish,name = "z-score")
   }else{
     melted_sub <- merge(melted_sub,df_border, by = c("IdCols","IdRows"),all.x = TRUE)
     colnames(melted_sub)[ncol(melted_sub)] <- "Border"
@@ -111,7 +111,7 @@ chibi.heatmap<- function(Tab = NULL,df_border = NULL,df_tile_col = NULL,
       scale_x_discrete(expand = c(0,0)) +
       scale_y_discrete(expand  = c(0,0)) +
       scale_fill_paletteer_c(palette_heatmap,
-                             limits = c(-range_fill_heatmap,range_fill_heatmap),oob = squish,name = "z-score") +
+                             limits = range_fill_heatmap,oob = squish,name = "z-score") +
       scale_color_manual(values = palette_border,na.value = "#00000000")
   }
   
